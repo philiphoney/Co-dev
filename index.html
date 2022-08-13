@@ -12,14 +12,15 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
     <!-- font-family: 'Roboto Mono', monospace; -->
     <script>
+var app = "co-dev";
 function logPost() {
-    var inputCO = document.getElementById("input").value;
-    var app = "co-dev";
+    var inputCO1 = document.getElementById("input").value;
+    var inputCO = inputCO1.toLowerCase();
     var textlog = '<span id="error">The command "'+ inputCO +'" is either misspelled orcould not be found.</span>'
 
     // Commands
     if (inputCO == "info") {
-    textlog = '✨ Co Dev Version [v1.0] </br>';}
+    textlog = '✨ Co Dev Version [v1.1] </br>';}
     if (inputCO == "cls" || inputCO == "clear") {
     document.getElementById("content-log").innerHTML = "";
     textlog = "";}
@@ -55,7 +56,7 @@ function logPost() {
     if (inputCO == "hostname") {
     textlog = 'host name: ' + window.location.hostname + '';}
     if (inputCO == "webprotokoll") {
-    textlog = '>webprotokoll: ' + window.location.protocol + '';}
+    textlog = 'webprotokoll: ' + window.location.protocol + '';}
     if (inputCO == "path") {
     textlog = 'pathname: ' + window.location.pathname + '>';}
     if (inputCO == "port") {
@@ -106,7 +107,6 @@ document.addEventListener('keydown', (event) => {
         document.getElementById("input").value = "";
     }
 });
-
     </script>
     <style>
         body {
