@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Co dev</title>
+    <link rel="shortcut icon" type="image" href="https://cdn.discordapp.com/attachments/881198263066312774/1007804217882333255/Co-Dev-logo.png">
+    <!-- font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
+    <!-- font-family: 'Roboto Mono', monospace; -->
+    <script>
+function logPost() {
+    var inputCO = document.getElementById("input").value;
+    var app = "co-dev";
+    var textlog = '<span id="error">The command "'+ inputCO +'" is either misspelled orcould not be found.</span>'
+
+    // Commands
+    if (inputCO == "info") {
+    textlog = '✨ Co Dev Version [v1.0] </br>';}
+    if (inputCO == "cls" || inputCO == "clear") {
+    document.getElementById("content-log").innerHTML = "";
+    textlog = "";}
+    if (inputCO == "exet") {
+    window.close()}
+    if (inputCO == "help") {
+    textlog = `
+    - cls / clear         = clear </br>
+    - info                = Infos about Co Dev </br>
+    - exet                = Close the Co Dev </br>
+    - system              = Infos about my OS</br>
+    - hosthref            = Website href </br>
+    - hostname            = Website Host Name </br>
+    - webprotokoll        = Website Protokoll </br>
+    - path                = Path Name </br>
+    - port                = Port Name</br>
+    - acn / appcodename   = App Code Name</br>
+    - an / appname        = App name</br>
+    - ce / cookieenabled  = ?</br>
+    - product             = Product</br>
+    - av / appversion     = Appversion </br>
+    - ua / useragent      = User Agent </br>
+    - pf / platform       = Plat Form</br>
+    - Language            = Language in the Browser</br>
+    - on / online         = online ?</br>
+    - java / Javaenabled  = Is Java Enabled </br>`;}
+    if (inputCO == "system") {
+    if (window.matchMedia('(prefers-color-scheme: dark)').matches) { style = "dark"; } else { style = "light"; }
+    textlog = `
+    [⨀] style: `+ style +` </br>`;}
+    if (inputCO == "hosthref") {
+    textlog = 'host name: ' +  window.location.href + '';}
+    if (inputCO == "hostname") {
+    textlog = 'host name: ' + window.location.hostname + '';}
+    if (inputCO == "webprotokoll") {
+    textlog = '>webprotokoll: ' + window.location.protocol + '';}
+    if (inputCO == "path") {
+    textlog = 'pathname: ' + window.location.pathname + '>';}
+    if (inputCO == "port") {
+    textlog = 'pathname: ' + window.location.port + '';}
+    if (inputCO == "acn" || inputCO == "appcodename") {
+    textlog = 'app code name: ' + navigator.appCodeName + '';}
+    if (inputCO == "an" || inputCO == "appname") {
+    textlog = 'app name: ' + navigator.appName + '';}
+    if (inputCO == "ce" || inputCO == "cookieenabled") {
+    textlog = 'Cookies Enabled: <span id="evend">' + navigator.cookieEnabled + '</span>';}
+    if (inputCO == "product") {
+    textlog = 'Product: ' + navigator.product + '';}
+    if (inputCO == "av" || inputCO == "appversion") {
+    textlog = 'App Version: ' + navigator.appVersion + '';}
+    if (inputCO == "ua" || inputCO == "useragent") {
+    textlog = 'User Agent: ' + navigator.userAgent + '';}
+    if (inputCO == "pf" || inputCO == "platform") {
+    textlog = 'Plat form: ' + navigator.platform + '';}
+    if (inputCO == "language") {
+    textlog = 'Language: ' + navigator.language + '';}
+    if (inputCO == "on" || inputCO == "online") {
+    textlog = 'Online: <span id="evend">' +  navigator.onLine + '</span>';}
+    if (inputCO == "java" || inputCO == "Javaenabled") {
+    textlog = 'Java Enabled: <span id="evend"> ' + navigator.javaEnabled() + '</span>';}
+
+    //Time
+    var today = new Date();
+    var h = today.getHours();
+    var m = today.getMinutes();
+    var s = today.getSeconds();
+    h = checkTime(h);
+    m = checkTime(m);
+    s = checkTime(s);
+
+    var time = (h + ":" + m + ":" + s);
+    document.getElementById("content-log").innerHTML += `<log><span id="line">◜</span><span id="log-i"><span id="line">[</span>` + app + `<span id="line">] </span>`+ time +`</span><br><span id="line">◟</span><span id="log-input">${input.value}</span><br><span id="text">`+ textlog +`</span></log></br>`;
+}
+
+function checkTime(i) {
+    if (i < 10) {i = "0" + i};
+    return i;
+}
+
+document.addEventListener('keydown', (event) => {
+    const keyCode = event.key;
+    if(event.keyCode == 13){
+        logPost();
+        document.getElementById("input").value = "";
+    }
+});
+
+    </script>
+    <style>
+        body {
+    margin: 0;
+    background-color: var(--color-background);
+    font-family: 'Roboto Mono', monospace;
+    color: var(--color-input-font);
+}
+
+:root {
+    --color-background: #12141c;
+    --color-input: #1a1c26;
+    --color-input-font: #c9c9c9;
+    --color-line: #02ff85;
+    --color-log-i: #36bbf4;
+    --color-log-input: #a9e5d8;
+    --color-text: #c9c9c9;;
+    --color-error:#ff5c5c;
+    --color-selection: #2e2e34;
+    --color-evend: rgb(255, 87, 185);
+}
+
+.input-content {
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}
+
+#input {
+  width: 100%;
+  border: 0px solid rgba(0, 0, 0, 0);
+  font-size: 16px;
+  font-family: 'Roboto Mono', monospace;
+  color: var(--color-input-font);
+  font-weight: bold;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  outline: none;
+  border: solid 2px;
+  border-color: rgba(0, 0, 0, 0);
+  border-radius: 0px;
+  height: 20px;
+  background-color: var(--color-input);
+}
+
+#content-log {
+    margin-left: 10px;
+}
+
+#line {
+    color: var(--color-line);
+}
+
+#log-i {
+    color: var(--color-log-i);
+}
+
+#log-text-input {
+    color: var(--color-text);
+}
+
+#log-input {
+color: var(--color-log-input);
+}
+
+#error {
+color: var(--color-error);
+}
+
+#text {
+    color: var(--color-text);
+}
+
+::selection {
+    background-color: var(--color-selection);
+}
+
+#evend {
+    color: var(--color-evend);
+}
+</style>
+</head>
+<body>
+<div class="input-content">
+<input id="input" type="text">
+</div>
+<div id="content-log">
+</div>
+</body>
+</html>
