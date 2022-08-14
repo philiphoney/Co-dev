@@ -12,25 +12,27 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
     <!-- font-family: 'Roboto Mono', monospace; -->
     <script>
+var tag = "";
 var app = "co-dev";
 function logPost() {
     var inputCO1 = document.getElementById("input").value;
     var inputCO = inputCO1.toLowerCase();
-    var textlog = '<span id="error">The command "'+ inputCO +'" is either misspelled orcould not be found.</span>'
+    var textlog = '<span id="error">The command "'+ inputCO1 +'" is either misspelled orcould not be found.</span></br>';
+    if (inputCO == "") {error();}
 
     // Commands
     if (inputCO == "info") {
-    textlog = '✨ Co Dev Version [v1.1] </br>';}
+    textlog = '✨ Co Dev Version [v2.0] </br>';}
     if (inputCO == "cls" || inputCO == "clear") {
     document.getElementById("content-log").innerHTML = "";
     textlog = "";}
-    if (inputCO == "exet") {
+    if (inputCO == "exit") {
     window.close()}
     if (inputCO == "help") {
     textlog = `
     - cls / clear         = clear </br>
     - info                = Infos about Co Dev </br>
-    - exet                = Close the Co Dev </br>
+    - exit                = Close the Co Dev </br>
     - system              = Infos about my OS</br>
     - hosthref            = Website href </br>
     - hostname            = Website Host Name </br>
@@ -46,41 +48,47 @@ function logPost() {
     - pf / platform       = Plat Form</br>
     - Language            = Language in the Browser</br>
     - on / online         = online ?</br>
-    - java / Javaenabled  = Is Java Enabled </br>`;}
+    - java / Javaenabled  = Is Java Enabled </br>
+    - search </br>
+    - hash </br>
+    `
+    ;}
     if (inputCO == "system") {
     if (window.matchMedia('(prefers-color-scheme: dark)').matches) { style = "dark"; } else { style = "light"; }
     textlog = `
-    [⨀] style: `+ style +` </br>`;}
+    [⨀] style: `+ style}
     if (inputCO == "hosthref") {
-    textlog = 'host name: ' +  window.location.href + '';}
+    textlog = 'Host name: ' +  window.location.href + '</br>';}
     if (inputCO == "hostname") {
-    textlog = 'host name: ' + window.location.hostname + '';}
+    textlog = 'Host name: ' + window.location.hostname + '</br>';}
     if (inputCO == "webprotokoll") {
-    textlog = 'webprotokoll: ' + window.location.protocol + '';}
+    textlog = 'Webprotokoll: ' + window.location.protocol + '</br>';}
     if (inputCO == "path") {
-    textlog = 'pathname: ' + window.location.pathname + '>';}
-    if (inputCO == "port") {
-    textlog = 'pathname: ' + window.location.port + '';}
+    textlog = 'Pathname: ' + window.location.pathname + '</br>';}
+    if (inputCO == "search") {
+    textlog = 'Search: ' + window.location.search + '</br>';}
+    if (inputCO == "hash") {
+    textlog = 'Hash: ' + window.location.hash + '</br>';}
     if (inputCO == "acn" || inputCO == "appcodename") {
-    textlog = 'app code name: ' + navigator.appCodeName + '';}
+    textlog = 'App code name: ' + navigator.appCodeName + '</br>';}
     if (inputCO == "an" || inputCO == "appname") {
-    textlog = 'app name: ' + navigator.appName + '';}
+    textlog = 'App name: ' + navigator.appName + '</br>';}
     if (inputCO == "ce" || inputCO == "cookieenabled") {
-    textlog = 'Cookies Enabled: <span id="evend">' + navigator.cookieEnabled + '</span>';}
+    textlog = 'Cookies Enabled: <span id="evend">' + navigator.cookieEnabled + '</span></br>';}
     if (inputCO == "product") {
-    textlog = 'Product: ' + navigator.product + '';}
+    textlog = 'Product: ' + navigator.product + '</br>';}
     if (inputCO == "av" || inputCO == "appversion") {
-    textlog = 'App Version: ' + navigator.appVersion + '';}
+    textlog = 'App Version: ' + navigator.appVersion + '</br>';}
     if (inputCO == "ua" || inputCO == "useragent") {
-    textlog = 'User Agent: ' + navigator.userAgent + '';}
+    textlog = 'User Agent: ' + navigator.userAgent + '</br>';}
     if (inputCO == "pf" || inputCO == "platform") {
-    textlog = 'Plat form: ' + navigator.platform + '';}
+    textlog = 'Plat form: ' + navigator.platform + '</br>';}
     if (inputCO == "language") {
-    textlog = 'Language: ' + navigator.language + '';}
+    textlog = 'Language: ' + navigator.language + '</br>';}
     if (inputCO == "on" || inputCO == "online") {
-    textlog = 'Online: <span id="evend">' +  navigator.onLine + '</span>';}
+    textlog = 'Online: <span id="evend">' +  navigator.onLine + '</span></br>';}
     if (inputCO == "java" || inputCO == "Javaenabled") {
-    textlog = 'Java Enabled: <span id="evend"> ' + navigator.javaEnabled() + '</span>';}
+    textlog = 'Java Enabled: <span id="evend"> ' + navigator.javaEnabled() + '</span></br>';}
 
     //Time
     var today = new Date();
@@ -92,7 +100,7 @@ function logPost() {
     s = checkTime(s);
 
     var time = (h + ":" + m + ":" + s);
-    document.getElementById("content-log").innerHTML += `<log><span id="line">◜</span><span id="log-i"><span id="line">[</span>` + app + `<span id="line">] </span>`+ time +`</span><br><span id="line">◟</span><span id="log-input">${input.value}</span><br><span id="text">`+ textlog +`</span></log></br>`;
+    document.getElementById("content-log").innerHTML += `<log><span id="line">◜</span><span id="log-i"><span id="line">[</span>` + app + `<span id="line">] </span>`+ time +`</span><br><span id="line">◟</span><span id="log-input">`+ tag +`</span><span id="log-input">${input.value}</span><br><span id="text">`+ textlog +`</span></log></br>`;
 }
 
 function checkTime(i) {
@@ -126,13 +134,15 @@ document.addEventListener('keydown', (event) => {
     --color-text: #c9c9c9;;
     --color-error:#ff5c5c;
     --color-selection: #2e2e34;
-    --color-evend: rgb(255, 87, 185);
+    --color-evend: #ff57b9;
+    --color-scrollbar: #2c2c2c80;
+    --color-scrollbar-1: #61616136;
 }
 
-.input-content {
+#input-content {
     position: fixed;
-    width: 100%;
     bottom: 0;
+    width: 100%;
 }
 
 #input {
@@ -145,7 +155,6 @@ document.addEventListener('keydown', (event) => {
   -webkit-transition: 0.5s;
   transition: 0.5s;
   outline: none;
-  border: solid 2px;
   border-color: rgba(0, 0, 0, 0);
   border-radius: 0px;
   height: 20px;
@@ -187,13 +196,20 @@ color: var(--color-error);
 #evend {
     color: var(--color-evend);
 }
+
+::-webkit-scrollbar-thumb {
+    background: var(--color-scrollbar-1);
+}
+
+::-webkit-scrollbar {
+    width: 0.5em;
+    height: 1em;
+    background: var(--color-scrollbar);
+}
 </style>
 </head>
 <body>
-<div class="input-content">
-<input id="input" type="text">
-</div>
-<div id="content-log">
-</div>
+<div id="content-log"></div>
+<div id="input-content"><input id="input" type="text"></div>
 </body>
 </html>
