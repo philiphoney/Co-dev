@@ -14,15 +14,24 @@
     <script>
 var tag = "";
 var app = "co-dev";
+let keyclipboard = {};
+var con0 = 0;
+var con1 = 1;
+var xcon = false;
+
 function logPost() {
     var inputCO1 = document.getElementById("input").value;
     var inputCO = inputCO1.toLowerCase();
     var textlog = '<span id="error">The command "'+ inputCO1 +'" is either misspelled orcould not be found.</span></br>';
     if (inputCO == "") {error();}
+    con0 += 1;
+    (con1 += 1);
+    keyclipboard[con0] = inputCO1;
+    xcon = true;
 
     // Commands
     if (inputCO == "info") {
-    textlog = '✨ Co Dev Version [v2.0] </br>';}
+    textlog = '✨ Co Dev Version [v2.1] </br>';}
     if (inputCO == "cls" || inputCO == "clear") {
     document.getElementById("content-log").innerHTML = "";
     textlog = "";}
@@ -113,6 +122,30 @@ document.addEventListener('keydown', (event) => {
     if(event.keyCode == 13){
         logPost();
         document.getElementById("input").value = "";
+    }
+
+    if(event.keyCode == 38){
+        con1 -= 1;
+       var keyoutput = keyclipboard[con1];
+        document.getElementById("input").value = keyoutput;
+       var keytest = document.getElementById("input").value;
+       if (keytest == "undefined") {
+        document.getElementById("input").value = "";
+       }
+       if (keytest == "undefined" && xcon == true) {
+        console.log(keyclipboard);
+        document.getElementById("input").value = keyclipboard[1];
+       }
+    }
+
+    if(event.keyCode == 40){
+        con1 += 1;
+       var keyoutput = keyclipboard[con1];
+        document.getElementById("input").value = keyoutput;
+        var keytest = document.getElementById("input").value;
+       if (keytest == "undefined") {
+        document.getElementById("input").value = "";
+       }
     }
 });
     </script>
