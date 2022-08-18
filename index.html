@@ -10,8 +10,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
+    <link rel="manifest" href="./manifest/manifest.webmanifest">
     <!-- font-family: 'Roboto Mono', monospace; -->
-    <script>
+<script type="application/javascript">
 var tag = "";
 var app = "co-dev";
 let keyclipboard = {};
@@ -25,13 +26,13 @@ function logPost() {
     var textlog = '<span id="error">The command "'+ inputCO1 +'" is either misspelled orcould not be found.</span></br>';
     if (inputCO == "") {error();}
     con0 += 1;
-    (con1 += 1);
+    con1 += 1;
     keyclipboard[con0] = inputCO1;
     xcon = true;
 
     // Commands
     if (inputCO == "info") {
-    textlog = '✨ Co Dev Version [v2.1] </br>';}
+    textlog = '✨ Co Dev Version [v3.0] </br>';}
     if (inputCO == "cls" || inputCO == "clear") {
     document.getElementById("content-log").innerHTML = "";
     textlog = "";}
@@ -55,11 +56,12 @@ function logPost() {
     - av / appversion     = Appversion </br>
     - ua / useragent      = User Agent </br>
     - pf / platform       = Plat Form</br>
-    - Language            = Language in the Browser</br>
+    - lang / Language     = Language in the Browser</br>
     - on / online         = online ?</br>
-    - java / Javaenabled  = Is Java Enabled </br>
-    - search </br>
-    - hash </br>
+    - java / javaenabled  = Is Java Enabled </br>
+    - pdf                 = Browser supports inline viewing of PDF files </br>
+    - sw / serviceworker  = Service worker </br>
+    - dnt / donottrack    = Do not track </br>
     `
     ;}
     if (inputCO == "system") {
@@ -74,10 +76,8 @@ function logPost() {
     textlog = 'Webprotokoll: ' + window.location.protocol + '</br>';}
     if (inputCO == "path") {
     textlog = 'Pathname: ' + window.location.pathname + '</br>';}
-    if (inputCO == "search") {
-    textlog = 'Search: ' + window.location.search + '</br>';}
-    if (inputCO == "hash") {
-    textlog = 'Hash: ' + window.location.hash + '</br>';}
+    if (inputCO == "port") {
+    textlog = 'Pathname: ' + window.location.port + '</br>';}
     if (inputCO == "acn" || inputCO == "appcodename") {
     textlog = 'App code name: ' + navigator.appCodeName + '</br>';}
     if (inputCO == "an" || inputCO == "appname") {
@@ -92,12 +92,22 @@ function logPost() {
     textlog = 'User Agent: ' + navigator.userAgent + '</br>';}
     if (inputCO == "pf" || inputCO == "platform") {
     textlog = 'Plat form: ' + navigator.platform + '</br>';}
-    if (inputCO == "language") {
+    if (inputCO == "lang" || inputCO == "language") {
     textlog = 'Language: ' + navigator.language + '</br>';}
     if (inputCO == "on" || inputCO == "online") {
     textlog = 'Online: <span id="evend">' +  navigator.onLine + '</span></br>';}
-    if (inputCO == "java" || inputCO == "Javaenabled") {
+    if (inputCO == "java" || inputCO == "javaenabled") {
     textlog = 'Java Enabled: <span id="evend"> ' + navigator.javaEnabled() + '</span></br>';}
+    if (inputCO == "pdf") {
+    if ('application/pdf' in navigator.mimeTypes) {
+    const { description, suffixes } = navigator.mimeTypes['application/pdf'];
+    var pdf = (`Description: ${description}, Suffix: ${suffixes}`);} else {pdf = "error"}
+    textlog = 'Browser supports inline viewing of PDF files: ' + pdf + '</br>';}
+    if (inputCO == "sw" || inputCO == "serviceworker") {
+        if ('serviceWorker' in navigator) {serviceWorker = "true"}else {serviceWorker = "false"}
+    textlog = 'Browser supports service workers: <span id="evend">' + serviceWorker + '</span></br>';}
+    if (inputCO == "dnt" || inputCO == "donottrack") {
+    textlog = ' Do Not Track: <span id="evend">' + navigator.doNotTrack + '</span></br>';}
 
     //Time
     var today = new Date();
@@ -110,6 +120,7 @@ function logPost() {
 
     var time = (h + ":" + m + ":" + s);
     document.getElementById("content-log").innerHTML += `<log><span id="line">◜</span><span id="log-i"><span id="line">[</span>` + app + `<span id="line">] </span>`+ time +`</span><br><span id="line">◟</span><span id="log-input">`+ tag +`</span><span id="log-input">${input.value}</span><br><span id="text">`+ textlog +`</span></log></br>`;
+    window.scrollTo(0,document.body.scrollHeight);
 }
 
 function checkTime(i) {
@@ -133,7 +144,6 @@ document.addEventListener('keydown', (event) => {
         document.getElementById("input").value = "";
        }
        if (keytest == "undefined" && xcon == true) {
-        console.log(keyclipboard);
         document.getElementById("input").value = keyclipboard[1];
        }
     }
