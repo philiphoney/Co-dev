@@ -32,7 +32,7 @@ function logPost() {
 
     // Commands
     if (inputCO == "info") {
-    textlog = '✨ Co Dev Version [v3.0] </br>';}
+    textlog = '✨ Co Dev Version [v3.1] </br>';}
     if (inputCO == "cls" || inputCO == "clear") {
     document.getElementById("content-log").innerHTML = "";
     textlog = "";}
@@ -67,7 +67,7 @@ function logPost() {
     if (inputCO == "system") {
     if (window.matchMedia('(prefers-color-scheme: dark)').matches) { style = "dark"; } else { style = "light"; }
     textlog = `
-    [⨀] style: `+ style}
+    [⨀] style: `+ style + `</br>`}
     if (inputCO == "hosthref") {
     textlog = 'Host name: ' +  window.location.href + '</br>';}
     if (inputCO == "hostname") {
@@ -104,10 +104,12 @@ function logPost() {
     var pdf = (`Description: ${description}, Suffix: ${suffixes}`);} else {pdf = "error"}
     textlog = 'Browser supports inline viewing of PDF files: ' + pdf + '</br>';}
     if (inputCO == "sw" || inputCO == "serviceworker") {
-        if ('serviceWorker' in navigator) {serviceWorker = "true"}else {serviceWorker = "false"}
+    if ('serviceWorker' in navigator) {serviceWorker = "true"}else {serviceWorker = "false"}
     textlog = 'Browser supports service workers: <span id="evend">' + serviceWorker + '</span></br>';}
     if (inputCO == "dnt" || inputCO == "donottrack") {
-    textlog = ' Do Not Track: <span id="evend">' + navigator.doNotTrack + '</span></br>';}
+    var dnt = navigator.doNotTrack
+    if (dnt == 1) {dnt = true} else {dnt = false}
+    textlog = ' Do Not Track: <span id="evend">' + dnt + '</span></br>';}
 
     //Time
     var today = new Date();
