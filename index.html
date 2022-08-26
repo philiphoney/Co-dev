@@ -30,9 +30,15 @@ function logPost() {
     keyclipboard[con0] = inputCO1;
     xcon = true;
 
+    // Commands+
+    var comdplus = inputCO1.split("");
+    var cmdW3 = (comdplus[0]+ comdplus[1]+ comdplus[2]);
+    var cmdW4 = (comdplus[0]+ comdplus[1]+ comdplus[2]+ comdplus[3]);
+    var cmdW5 = (comdplus[0]+ comdplus[1]+ comdplus[2]+ comdplus[3]+ comdplus[4]);
+
     // Commands
     if (inputCO == "info") {
-    textlog = '✨ Co Dev Version [v3.1] </br>';}
+    textlog = '✨ Co Dev Version [v4.0] </br>';}
     if (inputCO == "cls" || inputCO == "clear") {
     document.getElementById("content-log").innerHTML = "";
     textlog = "";}
@@ -62,12 +68,13 @@ function logPost() {
     - pdf                 = Browser supports inline viewing of PDF files </br>
     - sw / serviceworker  = Service worker </br>
     - dnt / donottrack    = Do not track </br>
+    - gh / GitHub         = Do not track </br>
+    - open [file name]    = Open files or links </br>
     `
     ;}
     if (inputCO == "system") {
     if (window.matchMedia('(prefers-color-scheme: dark)').matches) { style = "dark"; } else { style = "light"; }
-    textlog = `
-    [⨀] style: `+ style + `</br>`}
+    textlog = `[⨀] style: `+ style + `</br>`}
     if (inputCO == "hosthref") {
     textlog = 'Host name: ' +  window.location.href + '</br>';}
     if (inputCO == "hostname") {
@@ -110,6 +117,13 @@ function logPost() {
     var dnt = navigator.doNotTrack
     if (dnt == 1) {dnt = true} else {dnt = false}
     textlog = ' Do Not Track: <span id="evend">' + dnt + '</span></br>';}
+    if (cmdW4 == "open") {
+    let openPlus = [inputCO1.replace("open ", ``)];
+    window.open(openPlus);
+    textlog = 'The file ' + openPlus +' was opened' + '</br>';}
+    if (inputCO == "gh" || inputCO == "github") {
+    window.open('https://github.com/philiphoney/Co-dev');
+    textlog = ''+ '</br>';}
 
     //Time
     var today = new Date();
