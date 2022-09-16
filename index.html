@@ -12,6 +12,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
     <link rel="manifest" href="./manifest/manifest.webmanifest">
     <!-- font-family: 'Roboto Mono', monospace; -->
+    <script src="./js/moodypw.js"></script>
 <script type="application/javascript">
 var tag = "";
 var app = "co-dev";
@@ -31,14 +32,14 @@ function logPost() {
     xcon = true;
 
     // Commands+
-    var comdplus = inputCO1.split("");
+    var comdplus = inputCO.split("");
     var cmdW3 = (comdplus[0]+ comdplus[1]+ comdplus[2]);
     var cmdW4 = (comdplus[0]+ comdplus[1]+ comdplus[2]+ comdplus[3]);
     var cmdW5 = (comdplus[0]+ comdplus[1]+ comdplus[2]+ comdplus[3]+ comdplus[4]);
 
     // Commands
     if (inputCO == "info") {
-    textlog = '✨ Co Dev Version [v4.0] </br>';}
+    textlog = '✨ Co Dev Web Version [v5.0] </br>';}
     if (inputCO == "cls" || inputCO == "clear") {
     document.getElementById("content-log").innerHTML = "";
     textlog = "";}
@@ -49,27 +50,28 @@ function logPost() {
     - cls / clear         = clear </br>
     - info                = Infos about Co Dev </br>
     - exit                = Close the Co Dev </br>
-    - system              = Infos about my OS</br>
+    - system              = Infos about my OS </br>
     - hosthref            = Website href </br>
     - hostname            = Website Host Name </br>
     - webprotokoll        = Website Protokoll </br>
     - path                = Path Name </br>
-    - port                = Port Name</br>
-    - acn / appcodename   = App Code Name</br>
-    - an / appname        = App name</br>
+    - port                = Port Name </br>
+    - acn / appcodename   = App Code Name </br>
+    - an / appname        = App name </br>
     - ce / cookieenabled  = ?</br>
-    - product             = Product</br>
+    - product             = Product </br>
     - av / appversion     = Appversion </br>
     - ua / useragent      = User Agent </br>
-    - pf / platform       = Plat Form</br>
-    - lang / Language     = Language in the Browser</br>
-    - on / online         = online ?</br>
+    - pf / platform       = Plat Form </br>
+    - lang / Language     = Language in the Browser </br>
+    - on / online         = online ? </br>
     - java / javaenabled  = Is Java Enabled </br>
     - pdf                 = Browser supports inline viewing of PDF files </br>
     - sw / serviceworker  = Service worker </br>
     - dnt / donottrack    = Do not track </br>
     - gh / GitHub         = Do not track </br>
     - open [file name]    = Open files or links </br>
+    - rpw [true(with special characters) or false(without special character)] = Create random password </br>
     `
     ;}
     if (inputCO == "system") {
@@ -118,12 +120,15 @@ function logPost() {
     if (dnt == 1) {dnt = true} else {dnt = false}
     textlog = ' Do Not Track: <span id="evend">' + dnt + '</span></br>';}
     if (cmdW4 == "open") {
-    let openPlus = [inputCO1.replace("open ", ``)];
+    let openPlus = [inputCO.replace("open ", ``)];
     window.open(openPlus);
     textlog = 'The file ' + openPlus +' was opened' + '</br>';}
     if (inputCO == "gh" || inputCO == "github") {
     window.open('https://github.com/philiphoney/Co-dev');
     textlog = ''+ '</br>';}
+    if (cmdW3 == "rpw") {let pwPlus = [inputCO.replace("rpw ", ``)];
+    if (pwPlus == "false") {rpwPlus = outputpw0} if (pwPlus == "true") {rpwPlus = outputpw1} navigator.clipboard.writeText(rpwPlus); textlog = "Random password:"+ '</br>' + rpwPlus + '</br>';
+    if (pwPlus == "true" || pwPlus == "false"){}else {textlog = '<span id="error">The command "'+ inputCO1 +'" is either misspelled orcould not be found.</span></br>';}}
 
     //Time
     var today = new Date();
