@@ -1,0 +1,89 @@
+body {
+    margin: 0;
+    background-color: var(--color-background);
+    font-family: 'Roboto Mono', monospace;
+    color: var(--color-input-font);
+}
+
+:root {
+    --color-background: #12141c;
+    --color-input: #1a1c26;
+    --color-input-font: #c9c9c9;
+    --color-line: #02ff85;
+    --color-log-i: #36bbf4;
+    --color-log-input: #a9e5d8;
+    --color-text: #c9c9c9;;
+    --color-error:#ff5c5c;
+    --color-selection: #2e2e34;
+    --color-evend: #ff57b9;
+    --color-scrollbar: #2c2c2c80;
+    --color-scrollbar-1: #61616136;
+}
+
+#input-content {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+#input {
+  width: 100%;
+  border: 0px solid rgba(0, 0, 0, 0);
+  font-size: 16px;
+  font-family: 'Roboto Mono', monospace;
+  color: var(--color-input-font);
+  font-weight: bold;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  outline: none;
+  border-color: rgba(0, 0, 0, 0);
+  border-radius: 0px;
+  height: 20px;
+  background-color: var(--color-input);
+}
+
+#content-log {
+    margin-left: 10px;
+}
+
+#line {
+    color: var(--color-line);
+}
+
+#log-i {
+    color: var(--color-log-i);
+}
+
+#log-text-input {
+    color: var(--color-text);
+}
+
+#log-input {
+color: var(--color-log-input);
+}
+
+#error {
+color: var(--color-error);
+}
+
+#text {
+    color: var(--color-text);
+}
+
+::selection {
+    background-color: var(--color-selection);
+}
+
+#evend {
+    color: var(--color-evend);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--color-scrollbar-1);
+}
+
+::-webkit-scrollbar {
+    width: 0.5em;
+    height: 1em;
+    background: var(--color-scrollbar);
+}
