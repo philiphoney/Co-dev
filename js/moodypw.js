@@ -1,6 +1,3 @@
-var twobox;
-var threebox;
-var fourbox;
 var mr = 61;
 var mr1 = 73;
 var mr2 = 11;
@@ -18,6 +15,7 @@ let characters2 = ["§","$","%","&","/","(",")","=","?","*","!","?"]
 loopstart(); function loopstart() {setTimeout (time_evend, 500); function time_evend() {start();loopstart();}}
 function start() {
 
+    // normal no special character
     var ran0 = Math.floor(Math.random() * mr);
     var ran1 = Math.floor(Math.random() * mr);
     var ran2 = Math.floor(Math.random() * mr);
@@ -32,7 +30,8 @@ function start() {
     var ran11 = Math.floor(Math.random() * mr);
 
     outputpw0 = characters0[ran0] + characters0[ran1] + characters0[ran2] + characters0[ran3] + "-" + characters0[ran4] + characters0[ran5] + characters0[ran6] + characters0 [ran7] + "-" + characters0[ran8] + characters0[ran9] + characters0[ran10] + characters0 [ran11];
-    
+
+    // normal with special character
     var ran0 = Math.floor(Math.random() * mr1);
     var ran1 = Math.floor(Math.random() * mr1);
     var ran2 = Math.floor(Math.random() * mr1);
@@ -49,11 +48,10 @@ function start() {
     outputpw1 = characters1[ran0] + characters1[ran1] + characters1[ran2] + characters2[ran03] + "-" + characters1[ran4] + characters1[ran5] + characters1[ran6] + characters1[ran7] + "-" + characters1[ran8] + characters1[ran9] + characters1[ran10] + characters1[ran11];
 }
 
-// [anzal,  easy / no easy]
-//   fpw2();
  function fpw2() {
     rpwPlus2 = false;
 
+    // custom no special character
     var ran0 = Math.floor(Math.random() * mr);
     var ran1 = Math.floor(Math.random() * mr);
     var ran2 = Math.floor(Math.random() * mr);
@@ -81,6 +79,7 @@ function start() {
 
    var fpw0 = characters0[ran0] + characters0[ran1] + characters0[ran2] + characters0[ran3] + characters0[ran4] + characters0[ran5] + characters0[ran6] + characters0 [ran7] + characters0[ran8] + characters0[ran9] + characters0[ran10] + characters0[ran11] + characters0[ran12] + characters0[ran13] + characters0[ran14] + characters0[ran15] + characters0[ran16] + characters0[ran17] + characters0[ran18] + characters0[ran19] + characters0[ran20] + characters0 [ran21] + characters0[ran22] + characters0[ran23];
 
+   // custom with special character
    var ran0 = Math.floor(Math.random() * mr1);
    var ran1 = Math.floor(Math.random() * mr1);
    var ran2 = Math.floor(Math.random() * mr1);
@@ -108,6 +107,7 @@ function start() {
 
    var fpw1 = characters1[ran0] + characters1[ran1] + characters1[ran2] + characters2[ran03] + characters1[ran4] + characters1[ran5] + characters1[ran6] + characters1[ran7] + characters1[ran8] + characters1[ran9] + characters1[ran10] + characters1[ran11] + characters1[ran12] + characters1[ran13] + characters1[ran14] + characters1[ran15] + characters1[ran16] + characters1[ran17] + characters1[ran18] + characters1[ran19] + characters1[ran20] + characters1[ran21] + characters1[ran22] + characters1[ran23];
 
+    // length of password
     if (f4 == 0) {outputpw2 = fpw0.substr(0, 4); rpwPlus2 = true}
     if (t4 == 0) {outputpw2 = fpw1.substr(0, 4); rpwPlus2 = true}
     if (f6 == 0) {outputpw2 = fpw0.substr(0, 6); rpwPlus2 = true}
@@ -122,5 +122,5 @@ function start() {
     if (t18 == 0) {outputpw2 = fpw1.substr(0, 18); rpwPlus2 = true}
     if (f24 == 0) {outputpw2 = fpw0.substr(0, 24); rpwPlus2 = true}
     if (t24 == 0) {outputpw2 = fpw1.substr(0, 24); rpwPlus2 = true}
- }
+}
 
