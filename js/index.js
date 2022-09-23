@@ -32,7 +32,7 @@ function logPost() {
     if (inputCO == "exit") { window.close(); textlog = '<span id="error">exit could not be executed</span>'+ '</br>';}
     if (inputCO == "help") {
     textlog = `
-    - cls / clear         = clear </br>
+    - cls / clear         = Clear </br>
     - info                = Infos about Co Dev </br>
     - exit                = Close the Co Dev </br>
     - system              = Infos about my OS </br>
@@ -43,18 +43,18 @@ function logPost() {
     - port                = Port Name </br>
     - acn / appcodename   = App Code Name </br>
     - an / appname        = App name </br>
-    - ce / cookieenabled  = ?</br>
+    - ce / cookieenabled  = Cookies enabled ?</br>
     - product             = Product </br>
     - av / appversion     = Appversion </br>
     - ua / useragent      = User Agent </br>
     - pf / platform       = Platform </br>
-    - lang / Language     = Language in the Browser </br>
-    - on / online         = online ? </br>
+    - lang / language     = Language in the Browser </br>
+    - on / online         = Online ? </br>
     - java / javaenabled  = Is Java Enabled </br>
     - pdf                 = Browser supports inline viewing of PDF files </br>
     - sw / serviceworker  = Service worker </br>
     - dnt / donottrack    = Do not track </br>
-    - gh / GitHub         = Co Dev on GitHub </br>
+    - gh / github         = Co Dev on GitHub </br>
     - open [file name]    = Open files or links </br>
     - rpw [true(with special characters) or false(without special character)] = Create random password </br>
     - sha(1, 224, 256, 384, 512) [text] = Convert text to a hash </br>
