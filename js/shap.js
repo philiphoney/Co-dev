@@ -577,46 +577,46 @@
 })();
 
 const shap1 = function (inshap1) {
-    var keyoutput0 = sha1(inshap1);
-    var keyoutput1 = sha1(keyoutput0);
-    var keyoutput2 = sha1(keyoutput1);
-    var keyoutput3 = sha1(keyoutput2);
-    var outshap1 = sha1(keyoutput3);
+    var hash0 = sha1(inshap1);
+    var hash1 = sha1(hash0);
+    var hash2 = sha1(hash1);
+    var hash3 = sha1(hash2);
+    var outshap1 = sha1(hash3);
   return outshap1;
 }
 
 const shap224 = function (inshap224) {
-    var keyoutput0 = sha224(inshap224);
-    var keyoutput1 = sha224(keyoutput0);
-    var keyoutput2 = sha224(keyoutput1);
-    var keyoutput3 = sha224(keyoutput2);
-    var outshap224 = sha224(keyoutput3);
-  return outshap224;
+    var hash0 = sha224(inshap224);
+    var hash1 = sha224(hash0);
+    var hash2 = sha224(hash1);
+    var hash3 = sha224(hash2);
+    var outshap1 = sha224(hash3);
+  return outshap1;
 }
 
 const shap256 = function (inshap256) {
-    var keyoutput0 = sha256(inshap256);
-    var keyoutput1 = sha256(keyoutput0);
-    var keyoutput2 = sha256(keyoutput1);
-    var keyoutput3 = sha256(keyoutput2);
-    var outshap256 = sha256(keyoutput3);
+    var hash0 = sha256(inshap256);
+    var hash1 = sha256(hash0);
+    var hash2 = sha256(hash1);
+    var hash3 = sha256(hash2);
+    var outshap256 = sha256(hash3);
   return outshap256;
 }
 
 const shap384 = function (inshap384) {
-    var keyoutput0 = sha384(inshap384);
-    var keyoutput1 = sha384(keyoutput0);
-    var keyoutput2 = sha384(keyoutput1);
-    var keyoutput3 = sha384(keyoutput2);
-    var outshap384 = sha384(keyoutput3);
+    var hash0 = sha384(inshap384);
+    var hash1 = sha384(hash0);
+    var hash2 = sha384(hash1);
+    var hash3 = sha384(hash2);
+    var outshap384 = sha384(hash3);
   return outshap384;
 }
 
 const shap512 = function (inshap512) {
-    var keyoutput0 = sha512(inshap512);
-    var keyoutput1 = sha512(keyoutput0);
-    var keyoutput2 = sha512(keyoutput1);
-    var keyoutput3 = sha512(keyoutput2);
-    var outshap512 = sha512(keyoutput3);
+    var hash0 = sha512(inshap512);
+    var hash1 = sha512(hash0);
+    var hash2 = sha512(hash1);
+    var hash3 = sha512(hash2);
+    var outshap512 = sha512(hash3);
   return outshap512;
 }
