@@ -4,7 +4,15 @@ let keyclipboard = {};
 var con0 = 0;
 var con1 = 1;
 var xcon = false;
+var cmd_counter = 0;
 var f4; var t4; var f6; var t6; var f8; var t8; var f12; var t12; var f16; var t16; var f18; var t18; var f24; var t24;
+
+setTimeout (time_evend, 0); function time_evend() {
+    if (localStorage["co-dev-theme"] != null || localStorage["Name"] == 'Wert') {
+        var theme = localStorage["co-dev-theme"]
+        document.getElementById("body").style = (theme);
+    }
+}
 
 function logPost() {
     var inputCO1 = document.getElementById("input").value;
@@ -15,6 +23,7 @@ function logPost() {
     con1 += 1;
     keyclipboard[con0] = inputCO1;
     xcon = true;
+    cmd_counter += 1;
 
     // Commands+
     var comdplus = inputCO.split("");
@@ -23,18 +32,25 @@ function logPost() {
     var cmdW5 = (comdplus[0]+ comdplus[1]+ comdplus[2]+ comdplus[3]+ comdplus[4]);
     var cmdW6 = (comdplus[0]+ comdplus[1]+ comdplus[2]+ comdplus[3]+ comdplus[4]+ comdplus[5]);
     var cmdW7 = (comdplus[0]+ comdplus[1]+ comdplus[2]+ comdplus[3]+ comdplus[4]+ comdplus[5]+ comdplus[6]);
+    var cmdW8 = (comdplus[0]+ comdplus[1]+ comdplus[2]+ comdplus[3]+ comdplus[4]+ comdplus[5]+ comdplus[6]+ comdplus[7]);
+    var cmdW12 = (comdplus[0]+ comdplus[1]+ comdplus[2]+ comdplus[3]+ comdplus[4]+ comdplus[5]+ comdplus[6]+ comdplus[7]+ comdplus[8]+ comdplus[9]+ comdplus[10]+ comdplus[11]);
+    var cmdW13 = (comdplus[0]+ comdplus[1]+ comdplus[2]+ comdplus[3]+ comdplus[4]+ comdplus[5]+ comdplus[6]+ comdplus[7]+ comdplus[8]+ comdplus[9]+ comdplus[10]+ comdplus[11]+ comdplus[12]);
+    var cmdW18 = (comdplus[0]+ comdplus[1]+ comdplus[2]+ comdplus[3]+ comdplus[4]+ comdplus[5]+ comdplus[6]+ comdplus[7]+ comdplus[8]+ comdplus[9]+ comdplus[10]+ comdplus[11]+ comdplus[12]+ comdplus[13]+ comdplus[14]+ comdplus[15]+ comdplus[16]+ comdplus[17]);
+
 
     // Commands
     if (inputCO == "info") {
-    textlog = '✨ Co Dev Web Version [v7.3] </br>';}
+    textlog = '✨ Co Dev Web Version [v8.0] </br>';}
     if (inputCO == "cls" || inputCO == "clear") {
     document.getElementById("content-log").innerHTML = ""; textlog = "";}
     if (inputCO == "exit") { window.close(); textlog = '<span id="error">exit could not be executed</span>'+ '</br>';}
+    if (inputCO == "restart") {textlog = '</br>'; window.location.href = "./"; }
     if (inputCO == "help") {
     textlog = `
     - cls / clear         = Clear </br>
     - info                = Infos about Co Dev </br>
     - exit                = Close the Co Dev </br>
+    - restart             = Restart the Window </br>
     - system              = Infos about my OS </br>
     - hosthref            = Website href </br>
     - hostname            = Website Host Name </br>
@@ -53,12 +69,16 @@ function logPost() {
     - java / javaenabled  = Is Java Enabled </br>
     - pdf                 = Browser supports inline viewing of PDF files </br>
     - sw / serviceworker  = Service worker </br>
-    - dnt / donottrack    = Do not track </br>
-    - gh / github         = Co Dev on GitHub </br>
+    - dnt / donottrack = Do not track </br>
+    - gh / github  = Co Dev on GitHub </br>
     - open [file name]    = Open files or links </br>
     - rpw [true(with special characters) or false(without special character)] = Create random password </br>
     - sha(1, 224, 256, 384, 512) [text] = Convert text to a hash </br>
     - shap(1, 224, 256, 384, 512) [text] = Convert text to a hash </br>
+    - ls / localstorage   = List the Local Storage </br>
+    - ls clear / localstorage clear [or the name of the Key] = Local storage has been deleted </br>
+    - install theme [your theme code] = For more informations <a target="_blank" href="https://github.com/philiphoney/Co-dev/tree/main/theme">https://github.com/philiphoney/Co-dev/tree/main/theme</a> </br>
+    - remove theme = Remove the theme </br>
     `;}
     if (inputCO == "system") {
     if (window.matchMedia('(prefers-color-scheme: dark)').matches) { style = "dark"; } else { style = "light"; }
@@ -117,6 +137,15 @@ function logPost() {
     if (pwPlus == "false") {var rpwPlus = outputpw0} if (pwPlus == "true") {var rpwPlus = outputpw1} if (rpwPlus2 == true) {var rpwPlus = outputpw2}
     navigator.clipboard.writeText(rpwPlus); textlog = "Random password:"+ '</br>' + rpwPlus + '</br>';
     if (pwPlus == "true" || pwPlus == "false" || rpwPlus2 == true){}else {textlog = '<span id="error">The command "'+ inputCO1 +'" is either misspelled orcould not be found.</span></br>';}}
+    if (inputCO == "ls" || inputCO == "localstorage" ) {textlog = 'Local Storage list:' + '</br>' + '-------------------' + '</br>';}
+    if (cmdW8 == "ls clear") { if (inputCO == "ls clear") {localStorage.clear();
+    textlog = 'All local storage has been deleted !' + '</br>';} else {let lsPlus = [inputCO.replace("ls clear ", ``)]; localStorage.removeItem(lsPlus);
+    textlog = 'The local storage '+ lsPlus +' was deleted'+ '</br>';}}
+    if (cmdW18 == "localstorage clear") { if (inputCO == "localstorage clear") {localStorage.clear();
+    textlog = 'All local storage has been deleted !' + '</br>';} else {let lsPlus = [inputCO.replace("localstorage clear ", ``)]; localStorage.removeItem(lsPlus);
+    textlog = 'The local storage '+ lsPlus +' was deleted'+ '</br>';}}
+    if (cmdW13 == "install theme") {let themePlus = [inputCO.replace("install theme ", ``)]; localStorage.setItem('co-dev-theme', themePlus);
+    textlog = 'Theme has been installed. To load the theme you have to restart it' + '</br>';}
     // SHA
     if (cmdW4 == "sha1") {
     var sha1Plus = inputCO1.substr(5, 99999999999); let outsha1 = sha1(sha1Plus); textlog = 'SHA1 Hash: '+'</br>' + outsha1 + '</br>'; navigator.clipboard.writeText(outsha1);
@@ -149,7 +178,7 @@ function logPost() {
     if (cmdW7 == "shap512") {
     var shap512Plus = inputCO1.substr(8, 99999999999); let outshap512 = shap512(shap512Plus); textlog = 'SHAP512 Hash: '+'</br>' + outshap512 + '</br>'; navigator.clipboard.writeText(outshap512);
     if(shap512Plus == ""){textlog = '<span id="error">The command "'+ inputCO1 +'" is either misspelled orcould not be found.</span></br>';}}
-    
+
     // Time
     var today = new Date();
     var h = today.getHours();
@@ -160,8 +189,17 @@ function logPost() {
     s = checkTime(s);
 
     var time = (h + ":" + m + ":" + s);
-    document.getElementById("content-log").innerHTML += `<log><span id="line">◜</span><span id="log-i"><span id="line">[</span>` + app + `<span id="line">] </span>`+ time +`</span><br><span id="line">◟</span><span id="log-input">`+ tag +`</span><span id="log-input">${input.value}</span><br><span id="text">`+ textlog +`</span></log></br>`;
+    document.getElementById("content-log").innerHTML += `<log><span id="line">◜</span><span id="log-i"><span id="line">[</span>` + app + `<span id="line">] </span>`+ time +`</span><br><span id="line">◟</span><span id="log-input">`+ tag +`</span><span id="log-input">${input.value}</span><br><span id="text">`+ textlog +`<span id="co`+ cmd_counter +`"></span></span></log></br>`;
     window.scrollTo(0,document.body.scrollHeight);
+
+    if (inputCO == "localstorage" || inputCO == "ls") {
+    for (let i=0; i < localStorage.length; i++) {
+    let storageKey = localStorage.key(i);
+    document.getElementById("co"+ cmd_counter).innerHTML += storageKey + ' : ' + localStorage.getItem(storageKey) +'</br>';
+    window.scrollTo(0,document.body.scrollHeight);
+    }
+
+}
 }
 
 function checkTime(i) {

@@ -5,14 +5,14 @@ body {
     color: var(--color-input-font);
 }
 
-:root {
-    --color-background: #12141c;
-    --color-input: #1a1c26;
+#body {
+    --color-background:#12141c;
+    --color-input: #1a1c26c7;
     --color-input-font: #c9c9c9;
     --color-line: #02ff85;
     --color-log-i: #36bbf4;
     --color-log-input: #a9e5d8;
-    --color-text: #c9c9c9;;
+    --color-text: #c9c9c9;
     --color-error:#ff5c5c;
     --color-selection: #2e2e34;
     --color-evend: #ff57b9;
@@ -40,6 +40,12 @@ body {
   border-radius: 0px;
   height: 20px;
   background-color: var(--color-input);
+  -webkit-backdrop-filter: saturate(100%) blur(20px);
+  backdrop-filter: saturate(100%) blur(20px);
+}
+
+a {
+    color: var(--color-text);
 }
 
 #content-log {
