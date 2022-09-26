@@ -43,15 +43,18 @@ function logPost() {
     var cmdW6 = (comdplus[0]+ comdplus[1]+ comdplus[2]+ comdplus[3]+ comdplus[4]+ comdplus[5]);
     var cmdW7 = (comdplus[0]+ comdplus[1]+ comdplus[2]+ comdplus[3]+ comdplus[4]+ comdplus[5]+ comdplus[6]);
     var cmdW8 = (comdplus[0]+ comdplus[1]+ comdplus[2]+ comdplus[3]+ comdplus[4]+ comdplus[5]+ comdplus[6]+ comdplus[7]);
+    var cmdW9 = (comdplus[0]+ comdplus[1]+ comdplus[2]+ comdplus[3]+ comdplus[4]+ comdplus[5]+ comdplus[6]+ comdplus[7]+ comdplus[8]);
+    var cmdW10 = (comdplus[0]+ comdplus[1]+ comdplus[2]+ comdplus[3]+ comdplus[4]+ comdplus[5]+ comdplus[6]+ comdplus[7]+ comdplus[8]+ comdplus[9]);
     var cmdW12 = (comdplus[0]+ comdplus[1]+ comdplus[2]+ comdplus[3]+ comdplus[4]+ comdplus[5]+ comdplus[6]+ comdplus[7]+ comdplus[8]+ comdplus[9]+ comdplus[10]+ comdplus[11]);
     var cmdW13 = (comdplus[0]+ comdplus[1]+ comdplus[2]+ comdplus[3]+ comdplus[4]+ comdplus[5]+ comdplus[6]+ comdplus[7]+ comdplus[8]+ comdplus[9]+ comdplus[10]+ comdplus[11]+ comdplus[12]);
     var cmdW16 = (comdplus[0]+ comdplus[1]+ comdplus[2]+ comdplus[3]+ comdplus[4]+ comdplus[5]+ comdplus[6]+ comdplus[7]+ comdplus[8]+ comdplus[9]+ comdplus[10]+ comdplus[11]+ comdplus[12]+ comdplus[13]+ comdplus[14]+ comdplus[15]);
     var cmdW18 = (comdplus[0]+ comdplus[1]+ comdplus[2]+ comdplus[3]+ comdplus[4]+ comdplus[5]+ comdplus[6]+ comdplus[7]+ comdplus[8]+ comdplus[9]+ comdplus[10]+ comdplus[11]+ comdplus[12]+ comdplus[13]+ comdplus[14]+ comdplus[15]+ comdplus[16]+ comdplus[17]);
+    var cmdW19 = (comdplus[0]+ comdplus[1]+ comdplus[2]+ comdplus[3]+ comdplus[4]+ comdplus[5]+ comdplus[6]+ comdplus[7]+ comdplus[8]+ comdplus[9]+ comdplus[10]+ comdplus[11]+ comdplus[12]+ comdplus[13]+ comdplus[14]+ comdplus[15]+ comdplus[16]+ comdplus[17]+ comdplus[18]);
 
 
     // Commands
     if (inputCO == "info") {
-    textlog = '✨ Co Dev Web Version [v8.1] </br>';}
+    textlog = '✨ Co Dev Web Version [v9.0] </br>';}
     if (inputCO == "cls" || inputCO == "clear") {
     document.getElementById("content-log").innerHTML = ""; textlog = "";}
     if (inputCO == "exit") { window.close(); textlog = '<span id="error">exit could not be executed</span>'+ '</br>';}
@@ -87,9 +90,11 @@ function logPost() {
     - sha(1, 224, 256, 384, 512) [text] = Convert text to a hash </br>
     - shap(1, 224, 256, 384, 512) [text] = Convert text to a hash </br>
     - ls / localstorage   = List the Local Storage </br>
-    - ls / localstorage clear [or the name of the Key] = Local storage has been deleted </br>
+    - ls / localstorage add key=[key name] value=[value name] = Create a local storage </br>
+    - ls / localstorage clear = All local storage has been deleted </br>
     - install theme [your theme code] = For more informations <a target="_blank" href="https://github.com/philiphoney/Co-dev/tree/main/theme">https://github.com/philiphoney/Co-dev/tree/main/theme</a> </br>
     - remove theme = Remove the theme </br>
+    - remove ls / localstorage [key name] = The key and the value are deleted </br>
     `;}
     if (inputCO == "system") {
     if (window.matchMedia('(prefers-color-scheme: dark)').matches) { style = "dark"; } else { style = "light"; }
@@ -148,16 +153,27 @@ function logPost() {
     if (pwPlus == "true" || pwPlus == "false" || rpwPlus2 == true){}else {textlog = error;}}
     // Local Storage
     if (inputCO == "ls" || inputCO == "localstorage" ) {textlog = 'Local Storage list:' + '</br>' + '-------------------' + '</br>';}
-    if (cmdW8 == "ls clear") { if (inputCO == "ls clear") {localStorage.clear();
-    textlog = 'All local storage has been deleted !' + '</br>';} else {let lsPlus = [inputCO.replace("ls clear ", ``)]; localStorage.removeItem(lsPlus);
-    textlog = 'The local storage '+ lsPlus +' was deleted'+ '</br>';}}
-    if (cmdW18 == "localstorage clear") { if (inputCO == "localstorage clear") {localStorage.clear();
-    textlog = 'All local storage has been deleted !' + '</br>';} else {let lsPlus = [inputCO.replace("localstorage clear ", ``)]; localStorage.removeItem(lsPlus);
-    textlog = 'The local storage '+ lsPlus +' was deleted'+ '</br>';}}
+    if (inputCO == "ls clear" || inputCO == "localstorage clear") {localStorage.clear();
+    textlog = 'All local storage has been deleted !' + '</br>';}
+    if (cmdW18 == "localstorage clear" ) {localStorage.clear();
+    textlog = 'All local storage has been deleted !' + '</br>';}
+    if (cmdW6 == "ls add") {let lsaddPlus = [inputCO.replace("ls add key=", ``)]; var ls0 = lsaddPlus[0].indexOf("value="); var lskey = lsaddPlus[0].substr(0, ls0 -1); var lsvalue0 = lsaddPlus[0].substr(ls0, lsaddPlus[0].length); var lsvalue1 = [lsvalue0.replace("value=", ``)]; var lskeyerror = lskey[0]+lskey[1];
+    textlog = 'The local storage '+lskey+' was created' + '</br>';
+    if(ls0 == -1 || lskeyerror == "ls" ){textlog = error}else {localStorage.setItem(lskey, lsvalue1);}}
+    if (cmdW16 == "localstorage add") {let lsaddPlus = [inputCO.replace("localstorage add key=", ``)]; var ls0 = lsaddPlus[0].indexOf("value="); var lskey = lsaddPlus[0].substr(0, ls0 -1); var lsvalue0 = lsaddPlus[0].substr(ls0, lsaddPlus[0].length); var lsvalue1 = [lsvalue0.replace("value=", ``)]; var lskeyerror = lskey[0]+lskey[1];
+    textlog = 'The local storage '+lskey+' was created' + '</br>';
+    if(ls0 == -1 || lskeyerror == "lo" ){textlog = error}else {localStorage.setItem(lskey, lsvalue1);}}
     if (cmdW13 == "install theme") {let themePlus = [inputCO.replace("install theme ", ``)]; localStorage.setItem('co-dev-theme', themePlus);
     textlog = 'Theme has been installed. To load the theme you have to restart it' + '</br>';}
-    if (inputCO == "remove theme") {localStorage.setItem('co-dev-theme', '');
+    // Remove
+    if (inputCO == "remove theme") {localStorage.removeItem('co-dev-theme');
     textlog = 'The theme has been deleted to complete the change restart it' + '</br>';}
+    if (cmdW9 == "remove ls") {let rlsPlus = [inputCO.replace("remove ls ", ``)];
+    localStorage.removeItem(rlsPlus);
+    textlog = 'The local storage '+rlsPlus+' has been deleted' + '</br>';}
+    if (cmdW19 == "remove localstorage") {let rlsPlus = [inputCO.replace("remove localstorage ", ``)];
+    localStorage.removeItem(rlsPlus);
+    textlog = 'The local storage '+rlsPlus+' has been deleted' + '</br>';}
     // SHA
     if (cmdW4 == "sha1") {
     var sha1Plus = inputCO1.substr(5, 99999999999); let outsha1 = sha1(sha1Plus); textlog = 'SHA1 Hash: '+'</br>' + outsha1 + '</br>'; navigator.clipboard.writeText(outsha1);
