@@ -52,7 +52,6 @@ function logPost() {
     cmd_counter += 1;
     keyclipboard[con0] = inputCO1;
     history[c_his] = inputCO;
-    console.log(history);
 
     // Commands+
     var cmdW2 = inputCO.substr(0,2);
@@ -72,7 +71,7 @@ function logPost() {
 
     // Commands
     if (inputCO == "info") {
-    textlog = '✨ Co dev Web Version [v10.0] </br>';}
+    textlog = '✨ Co dev Web Version [v10.1] </br>';}
     if (inputCO == "cls" || inputCO == "clear") {
     document.getElementById("content-log").innerHTML = ""; textlog = "";}
     if (inputCO == "exit") { window.close(); textlog = '<span id="error">exit could not be executed</span>'+ '</br>';}
@@ -204,13 +203,13 @@ function logPost() {
     textlog = 'Theme has been installed. To load the theme you have to restart it' + '</br>';}
     // JSD / CDN
     if (cmdW3 == "cdn") {
-    let jsdPlus = [inputCO1.replace("cdn ", ``)];jsd(jsdPlus[0]);
+    var jsdPlus = inputCO1.substr(4, inputCO1.length);jsd(jsdPlus);
     if (jsd_output() == "error") {
     textlog = '<span id="warning">⚠️ The '+jsdPlus+' file cannot be CDN converted</span>'+'</br>';
     }else {
-    var dlink = jsdPlus[0].substr(0, 5);
-    if (dlink == "https") {d_http = [jsdPlus[0].replace("https://", ``)];}
-    if (dlink == "http:") {d_http = [jsdPlus[0].replace("http://", ``)];}
+    var dlink = inputCO1.substr(4, 5);
+    if (dlink == "https") {d_http = [jsdPlus.replace("https://", ``)];}
+    if (dlink == "http:") {d_http = [jsdPlus.replace("http://", ``)];}
     var dhttp = d_http[0].indexOf("/");
     d_server = d_http[0].substr(0, dhttp);
     folders = [d_http[0].replace(d_server, ``)];
