@@ -1,11 +1,11 @@
 body {
     margin: 0;
     background-color: var(--color-background);
-    font-family: 'Roboto Mono', monospace;
     color: var(--color-input-font);
 }
 
 #body {
+    --font:'Roboto Mono', monospace;
     --color-background:#12141c;
     --color-input: #1a1c26c7;
     --color-input-font: #c9c9c9;
@@ -16,8 +16,18 @@ body {
     --color-error:#ff5c5c;
     --color-selection: #2e2e34;
     --color-evend: #ff57b9;
+    --color-warning: #ffdd57;
     --color-scrollbar: #2c2c2c80;
     --color-scrollbar-1: #61616136;
+    --color-view: #808080;
+
+    --d-color-server-github: #0caade;
+    --d-color-folder: #1cc17d;
+    --d-color-text: #000000;
+
+    font-family: var(--font);
+    line-height: 20px;
+
 }
 
 #input-content {
@@ -30,7 +40,7 @@ body {
   width: 100%;
   border: 0px solid rgba(0, 0, 0, 0);
   font-size: 16px;
-  font-family: 'Roboto Mono', monospace;
+  font-family: var(--font);
   color: var(--color-input-font);
   font-weight: bold;
   -webkit-transition: 0.5s;
@@ -82,6 +92,22 @@ color: var(--color-error);
 
 #evend {
     color: var(--color-evend);
+}
+
+#warning {
+    color: var(--color-warning);
+}
+
+#d span{
+    border-radius: 0px 10px 10px 0px;
+    padding-left: 10px;
+    padding-right: 10px;
+    color: var(--d-color-text);
+}
+
+#view {
+  background-color: var(--color-view);
+  color: white;
 }
 
 ::-webkit-scrollbar-thumb {
