@@ -24,6 +24,7 @@ var live_input;
 var view = false;
 let history = [];
 var c_his = -1;
+var co_active = false
 var f4; var t4; var f6; var t6; var f8; var t8; var f12; var t12; var f16; var t16; var f18; var t18; var f24; var t24;
 
 setTimeout (time_evend, 0); function time_evend() {
@@ -71,7 +72,7 @@ function logPost() {
 
     // Commands
     if (inputCO == "info") {
-    textlog = '✨ Co dev Web Version [v10.1] </br>';}
+    textlog = '✨ Co dev Web Version [v10.2] </br>';}
     if (inputCO == "cls" || inputCO == "clear") {
     document.getElementById("content-log").innerHTML = ""; textlog = "";}
     if (inputCO == "exit") { window.close(); textlog = '<span id="error">exit could not be executed</span>'+ '</br>';}
@@ -283,22 +284,32 @@ function logPost() {
 
     var time = (h + ":" + m + ":" + s);
     document.getElementById("content-log").innerHTML += `<log><span id="line">◜</span><span id="log-i"><span id="line">[</span>` + app + `<span id="line">] </span>`+ time +`</span><br><span id="line">◟</span><span id="log-input">`+ tag +`</span><span id="log-input">${input.value}</span><br><span id="text">`+ textlog +`<span id="co`+ cmd_counter +`"></span></span></log></br>`;
-    window.scrollTo(0,document.body.scrollHeight);
 
-    if (inputCO == "date") {document.getElementById("co"+cmd_counter).innerHTML += moodyfulldate+'</br>'; window.scrollTo(0,document.body.scrollHeight);}
+    if (inputCO == "date") {document.getElementById("co"+cmd_counter).innerHTML += moodyfulldate+'</br>'; window.scrollTo(0,document.body.scrollHeight);co_active = true;;}
 
     if (inputCO == "history") {
     for (let i=0; i < history.length; ++i) {
     document.getElementById("co"+cmd_counter).innerHTML += "• "+history[i]+'</br>';
-    window.scrollTo(0,document.body.scrollHeight);
+    co_active = true;
     }}
 
     if (inputCO == "localstorage" || inputCO == "ls") {
     for (let i=0; i < localStorage.length; i++) {
     let storageKey = localStorage.key(i);
     document.getElementById("co"+cmd_counter).innerHTML += "• "+storageKey +' : '+ localStorage.getItem(storageKey) +'</br>';
-    window.scrollTo(0,document.body.scrollHeight);
+    co_active = true;
     }}
+
+    // The End of Command
+    if (cmd_counter == 1) {} else {
+    var cmd_befor = cmd_counter-1
+    document.getElementById("co"+cmd_befor).style = ("padding: 0px;");}
+    if(co_active == true) {
+    document.getElementById("co"+cmd_counter).style = ("padding: 0px 0px 40px;");
+    co_active = false
+    } else {
+    document.getElementById("co"+cmd_counter).style = ("padding: 20px;");}
+    window.scrollTo(0,document.body.scrollHeight);
 }
 
 function checkTime(i) {
