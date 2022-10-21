@@ -22,8 +22,11 @@ body {
     --color-view: #808080;
 
     --d-color-server-github: #0caade;
+    --d-color-server-npm: #de0f0c;
+    --d-color-server-wp: #ffffff;
     --d-color-folder: #1cc17d;
     --d-color-text: #000000;
+
 
     font-family: var(--font);
     line-height: 20px;

@@ -76,8 +76,16 @@ function start() {
     var ran21 = Math.floor(Math.random() * mr);
     var ran22 = Math.floor(Math.random() * mr);
     var ran23 = Math.floor(Math.random() * mr);
+    var ran24 = Math.floor(Math.random() * mr);
+    var ran25 = Math.floor(Math.random() * mr);
+    var ran26 = Math.floor(Math.random() * mr);
+    var ran27 = Math.floor(Math.random() * mr);
+    var ran28 = Math.floor(Math.random() * mr);
+    var ran29 = Math.floor(Math.random() * mr);
+    var ran30 = Math.floor(Math.random() * mr);
+    var ran31 = Math.floor(Math.random() * mr);
 
-   var fpw0 = characters0[ran0] + characters0[ran1] + characters0[ran2] + characters0[ran3] + characters0[ran4] + characters0[ran5] + characters0[ran6] + characters0 [ran7] + characters0[ran8] + characters0[ran9] + characters0[ran10] + characters0[ran11] + characters0[ran12] + characters0[ran13] + characters0[ran14] + characters0[ran15] + characters0[ran16] + characters0[ran17] + characters0[ran18] + characters0[ran19] + characters0[ran20] + characters0 [ran21] + characters0[ran22] + characters0[ran23];
+    var fpw0 = characters0[ran0] + characters0[ran1] + characters0[ran2] + characters2[ran03] + characters0[ran4] + characters0[ran5] + characters0[ran6] + characters0[ran7] + characters0[ran8] + characters0[ran9] + characters0[ran10] + characters0[ran11] + characters0[ran12] + characters0[ran13] + characters0[ran14] + characters0[ran15] + characters0[ran16] + characters0[ran17] + characters0[ran18] + characters0[ran19] + characters0[ran20] + characters0[ran21] + characters0[ran22] + characters0[ran23] + characters0[ran24] + characters0[ran25] + characters0[ran26] + characters0[ran27] + characters0[ran28] + characters0[ran29] + characters0[ran30] + characters0[ran31];
 
    // custom with special character
    var ran0 = Math.floor(Math.random() * mr1);
@@ -104,8 +112,16 @@ function start() {
    var ran21 = Math.floor(Math.random() * mr1);
    var ran22 = Math.floor(Math.random() * mr1);
    var ran23 = Math.floor(Math.random() * mr1);
+   var ran24 = Math.floor(Math.random() * mr1);
+   var ran25 = Math.floor(Math.random() * mr1);
+   var ran26 = Math.floor(Math.random() * mr1);
+   var ran27 = Math.floor(Math.random() * mr1);
+   var ran28 = Math.floor(Math.random() * mr1);
+   var ran29 = Math.floor(Math.random() * mr1);
+   var ran30 = Math.floor(Math.random() * mr1);
+   var ran31 = Math.floor(Math.random() * mr1);
 
-   var fpw1 = characters1[ran0] + characters1[ran1] + characters1[ran2] + characters2[ran03] + characters1[ran4] + characters1[ran5] + characters1[ran6] + characters1[ran7] + characters1[ran8] + characters1[ran9] + characters1[ran10] + characters1[ran11] + characters1[ran12] + characters1[ran13] + characters1[ran14] + characters1[ran15] + characters1[ran16] + characters1[ran17] + characters1[ran18] + characters1[ran19] + characters1[ran20] + characters1[ran21] + characters1[ran22] + characters1[ran23];
+   var fpw1 = characters1[ran0] + characters1[ran1] + characters1[ran2] + characters2[ran03] + characters1[ran4] + characters1[ran5] + characters1[ran6] + characters1[ran7] + characters1[ran8] + characters1[ran9] + characters1[ran10] + characters1[ran11] + characters1[ran12] + characters1[ran13] + characters1[ran14] + characters1[ran15] + characters1[ran16] + characters1[ran17] + characters1[ran18] + characters1[ran19] + characters1[ran20] + characters1[ran21] + characters1[ran22] + characters1[ran23] + characters1[ran24] + characters1[ran25] + characters1[ran26] + characters1[ran27] + characters1[ran28] + characters1[ran29] + characters1[ran30] + characters1[ran31];
 
     // length of password
     if (f4 == 0) {outputpw2 = fpw0.substr(0, 4); rpwPlus2 = true}
@@ -122,5 +138,9 @@ function start() {
     if (t18 == 0) {outputpw2 = fpw1.substr(0, 18); rpwPlus2 = true}
     if (f24 == 0) {outputpw2 = fpw0.substr(0, 24); rpwPlus2 = true}
     if (t24 == 0) {outputpw2 = fpw1.substr(0, 24); rpwPlus2 = true}
+    if (f28 == 0) {outputpw2 = fpw0.substr(0, 28); rpwPlus2 = true}
+    if (t28 == 0) {outputpw2 = fpw1.substr(0, 28); rpwPlus2 = true}
+    if (f32 == 0) {outputpw2 = fpw0.substr(0, 32); rpwPlus2 = true}
+    if (t32 == 0) {outputpw2 = fpw1.substr(0, 32); rpwPlus2 = true}
 }
 

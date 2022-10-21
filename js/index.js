@@ -72,7 +72,7 @@ function logPost() {
 
     // Commands
     if (inputCO == "info") {
-    textlog = '✨ Co dev Web Version [v10.2] </br>';}
+    textlog = '✨ Co dev Web Version [v11.0] </br>';}
     if (inputCO == "cls" || inputCO == "clear") {
     document.getElementById("content-log").innerHTML = ""; textlog = "";}
     if (inputCO == "exit") { window.close(); textlog = '<span id="error">exit could not be executed</span>'+ '</br>';}
@@ -172,7 +172,7 @@ function logPost() {
     if (inputCO == "gh" || inputCO == "github") { window.open('https://github.com/philiphoney/Co-dev');
     textlog = ''+ '</br>';}
     if (cmdW3 == "rpw") {let pwPlus = [inputCO.replace("rpw ", ``)];
-    f4 = pwPlus[0].search ("4 false"); t4 = pwPlus[0].search ("4 true"); f6 = pwPlus[0].search ("6 false"); t6 = pwPlus[0].search ("6 true"); f8 = pwPlus[0].search ("8 false"); t8 = pwPlus[0].search ("8 true"); f12 = pwPlus[0].search ("12 false"); t12 = pwPlus[0].search ("12 true"); f16 = pwPlus[0].search ("16 false"); t16 = pwPlus[0].search ("16 true"); f18 = pwPlus[0].search ("18 false"); t18 = pwPlus[0].search ("18 true"); f24 = pwPlus[0].search ("24 false"); t24 = pwPlus[0].search ("24 true"); fpw2();
+    f4 = pwPlus[0].search ("4 false"); t4 = pwPlus[0].search ("4 true"); f6 = pwPlus[0].search ("6 false"); t6 = pwPlus[0].search ("6 true"); f8 = pwPlus[0].search ("8 false"); t8 = pwPlus[0].search ("8 true"); f12 = pwPlus[0].search ("12 false"); t12 = pwPlus[0].search ("12 true"); f16 = pwPlus[0].search ("16 false"); t16 = pwPlus[0].search ("16 true"); f18 = pwPlus[0].search ("18 false"); t18 = pwPlus[0].search ("18 true"); f24 = pwPlus[0].search ("24 false"); t24 = pwPlus[0].search ("24 true");     t28 = pwPlus[0].search ("28 true"); f28 = pwPlus[0].search ("28 false"); t32 = pwPlus[0].search ("32 true"); f32 = pwPlus[0].search ("32 false"); fpw2(); ;
     if (pwPlus == "false") {var rpwPlus = outputpw0} if (pwPlus == "true") {var rpwPlus = outputpw1} if (rpwPlus2 == true) {var rpwPlus = outputpw2}
     navigator.clipboard.writeText(rpwPlus); textlog = "Random password:"+ '</br>' + rpwPlus + '</br>';
     if (pwPlus == "true" || pwPlus == "false" || rpwPlus2 == true){}else {textlog = error;}}
@@ -208,13 +208,25 @@ function logPost() {
     if (jsd_output() == "error") {
     textlog = '<span id="warning">⚠️ The '+jsdPlus+' file cannot be CDN converted</span>'+'</br>';
     }else {
-    var dlink = inputCO1.substr(4, 5);
-    if (dlink == "https") {d_http = [jsdPlus.replace("https://", ``)];}
-    if (dlink == "http:") {d_http = [jsdPlus.replace("http://", ``)];}
+    var dlink0 = inputCO1.substr(4, 5);
+    var linktest0 = inputCO.substr(4, 3);
+    var linktest1 = inputCO.substr(4, 2);
+    if (dlink0 == "https") {d_http = [jsdPlus.replace("https://", ``)];}
+    if (dlink0 == "http:") {d_http = [jsdPlus.replace("http://", ``)];}
+    // npm / gh / wp
+    if (linktest0 == "npm" || linktest1 == "gh" || linktest1 == "wp") {
+    var lt = jsdPlus.substr(0, jsdPlus.length);
+    var lt1 = lt.indexOf("/");
+    var d_server = lt.substr(0, lt1);
+    var folders = lt.substr(lt1, lt.length);
+    } else {
     var dhttp = d_http[0].indexOf("/");
     d_server = d_http[0].substr(0, dhttp);
     folders = [d_http[0].replace(d_server, ``)];
-    textlog = '<span id="d"><span style="background-color: var(--d-color-server-github);">'+d_server+'</span>'+'<span style="background-color: var(--d-color-folder);">'+folders+'</span></span>' + '</br>'+'Jsdelivr link:' + '</br>'+jsd_output()+'</br>'; navigator.clipboard.writeText(jsd_output());+ '</br>'};
+    }
+    if (dlink0 == "https" || dlink0 == "http:" || d_server == "gh") {textlog = '<span id="d"><span style="background-color: var(--d-color-server-github);">'+d_server+'</span>'+'<span style="background-color: var(--d-color-folder);">'+folders+'</span></span>' + '</br>'+'Jsdelivr link:' + '</br>'+jsd_output()+'</br>'; navigator.clipboard.writeText(jsd_output());+ '</br>';}
+    if (d_server == "npm") {textlog = '<span id="d"><span style="background-color: var(--d-color-server-npm);">'+d_server+'</span>'+'<span style="background-color: var(--d-color-folder);">'+folders+'</span></span>' + '</br>'+'Jsdelivr link:' + '</br>'+jsd_output()+'</br>'; navigator.clipboard.writeText(jsd_output());+ '</br>';}
+    if (d_server == "wp") {textlog = '<span id="d"><span style="background-color: var(--d-color-server-wp);">'+d_server+'</span>'+'<span style="background-color: var(--d-color-folder);">'+folders+'</span></span>' + '</br>'+'Jsdelivr link:' + '</br>'+jsd_output()+'</br>'; navigator.clipboard.writeText(jsd_output());+ '</br>';}}
     if (jsdPlus == "cdn" || jsdPlus == "") {textlog = error}}
     // Remove
     if (inputCO == "remove theme") {localStorage.removeItem('co-dev-theme');
@@ -303,7 +315,8 @@ function logPost() {
     // The End of Command
     if (cmd_counter == 1) {} else {
     var cmd_befor = cmd_counter-1
-    document.getElementById("co"+cmd_befor).style = ("padding: 0px;");}
+    document.getElementById("co"+cmd_befor).style = ("padding: 0px;");
+    }
     if(co_active == true) {
     document.getElementById("co"+cmd_counter).style = ("padding: 0px 0px 40px;");
     co_active = false
