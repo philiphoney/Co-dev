@@ -25,6 +25,7 @@ var view = false;
 let history = [];
 var c_his = -1;
 var co_active = false
+var inputCO1 = "";
 var f4; var t4; var f6; var t6; var f8; var t8; var f12; var t12; var f16; var t16; var f18; var t18; var f24; var t24;
 
 setTimeout (time_evend, 0); function time_evend() {
@@ -41,7 +42,7 @@ setTimeout (time_evend, 0); function time_evend() {
 
 function logPost() {
     document.getElementById("input").setAttribute("placeholder", "");
-    var inputCO1 = document.getElementById("input").value;
+    inputCO1 = document.getElementById("input").value;
     inputCO = inputCO1.toLowerCase();
     textlog = '<span id="error">The command "'+ inputCO1 +'" is either misspelled orcould not be found.</span></br>';
     error = '<span id="error">The command "'+ inputCO1 +'" is either misspelled orcould not be found.</span></br>';
@@ -194,12 +195,12 @@ function logPost() {
     textlog = 'All local storage has been deleted !' + '</br>';}
     if (cmdW18 == "localstorage clear" ) {localStorage.clear();
     textlog = 'All local storage has been deleted !' + '</br>';}
-    if (cmdW6 == "ls add") {let lsaddPlus = [inputCO.replace("ls add key=", ``)]; var ls0 = lsaddPlus[0].indexOf("value="); var lskey = lsaddPlus[0].substr(0, ls0 -1); var lsvalue0 = lsaddPlus[0].substr(ls0, lsaddPlus[0].length); var lsvalue1 = [lsvalue0.replace("value=", ``)]; var lskeyerror = lskey[0]+lskey[1];
-    textlog = 'The local storage '+lskey+' was created' + '</br>';
-    if(ls0 == -1 || lskeyerror == "ls" ){textlog = error}else {localStorage.setItem(lskey, lsvalue1);}}
-    if (cmdW16 == "localstorage add") {let lsaddPlus = [inputCO.replace("localstorage add key=", ``)]; var ls0 = lsaddPlus[0].indexOf("value="); var lskey = lsaddPlus[0].substr(0, ls0 -1); var lsvalue0 = lsaddPlus[0].substr(ls0, lsaddPlus[0].length); var lsvalue1 = [lsvalue0.replace("value=", ``)]; var lskeyerror = lskey[0]+lskey[1];
-    textlog = 'The local storage '+lskey+' was created' + '</br>';
-    if(ls0 == -1 || lskeyerror == "lo" ){textlog = error}else {localStorage.setItem(lskey, lsvalue1);}}
+    if (cmdW6 == "ls add") {localstorage();
+    if (localstorage() == error) {} else {
+    textlog = 'The local storage '+localstorage()+' was created' + '</br>';}}
+    if (cmdW16 == "localstorage add") {localstorage();
+    if (localstorage() == error) {} else {
+    textlog = 'The local storage '+localstorage()+' was created' + '</br>';}}
     if (cmdW13 == "install theme") {let themePlus = [inputCO.replace("install theme ", ``)]; localStorage.setItem('co-dev-theme', themePlus);
     textlog = 'Theme has been installed. To load the theme you have to restart it' + '</br>';}
     // JSD / CDN
@@ -369,4 +370,25 @@ const search = function (sinput) {
 function rhash() {
 var outputrh = sha1(outputpw1);
 return outputrh;
+}
+
+
+const localstorage = function() {
+    var ls_k = inputCO.indexOf("key=");
+    var longone = inputCO1.substr(ls_k + 4, inputCO1.length);
+    var ls_v = longone.indexOf("value=");
+    var value = longone.substr(ls_v+6, longone.length);
+    var ls_l = longone.indexOf(" ");
+    var key = longone.substr(0, ls_l);
+    console.log(ls_k);
+    console.log(ls_v);
+    console.log(value);
+    console.log(key);
+    console.log(longone);
+    if (ls_k == -1 || ls_v == -1) {
+    return error;
+    } else {
+    localStorage.setItem(key, value);
+    return key;
+    }
 }
