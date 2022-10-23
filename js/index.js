@@ -73,7 +73,7 @@ function logPost() {
 
     // Commands
     if (inputCO == "info") {
-    textlog = '✨ Co dev Web Version [v11.0] </br>';}
+    textlog = '✨ Co dev Web Version [v11.2] </br>';}
     if (inputCO == "cls" || inputCO == "clear") {
     document.getElementById("content-log").innerHTML = ""; textlog = "";}
     if (inputCO == "exit") { window.close(); textlog = '<span id="error">exit could not be executed</span>'+ '</br>';}
