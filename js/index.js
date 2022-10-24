@@ -73,9 +73,9 @@ function logPost() {
 
     // Commands
     if (inputCO == "info") {
-    textlog = '✨ Co dev Web Version [v11.2] </br>';}
+    textlog = '✨ Co dev Web Version [v11.3] </br>';}
     if (inputCO == "cls" || inputCO == "clear") {
-    document.getElementById("content-log").innerHTML = ""; textlog = "";}
+    document.getElementById("content-log").innerHTML = ""; textlog = ""; cmd_counter = 1}
     if (inputCO == "exit") { window.close(); textlog = '<span id="error">exit could not be executed</span>'+ '</br>';}
     if (inputCO == "restart") {textlog = '</br>'; window.location.href = "./"; }
     if (inputCO == "help") {
@@ -120,7 +120,7 @@ function logPost() {
     • date = Show for just all dates </br>
     • font = What font is supported </br>
     • font [your font] = Changes the font </br>
-    • cdn [your link] = Create a CDN for your GitHub script with <a target="_blank" href="https://www.jsdelivr.com/">jsDeliv</a> </br>
+    • cdn [your link] = Create a CDN for your script with <a target="_blank" href="https://www.jsdelivr.com/">jsDeliv</a> </br>
     `;}
     if (inputCO == "system") {
     if (window.matchMedia('(prefers-color-scheme: dark)').matches) { style = "dark"; } else { style = "light"; }
@@ -232,10 +232,10 @@ function logPost() {
     // Remove
     if (inputCO == "remove theme") {localStorage.removeItem('co-dev-theme');
     textlog = 'The theme has been deleted to complete the change restart it' + '</br>';}
-    if (cmdW9 == "remove ls") {let rlsPlus = [inputCO.replace("remove ls ", ``)];
+    if (cmdW9 == "remove ls") {var rlsPlus = inputCO1.substr(10, inputCO1.length);
     localStorage.removeItem(rlsPlus);
     textlog = 'The local storage '+rlsPlus+' has been deleted' + '</br>';}
-    if (cmdW19 == "remove localstorage") {let rlsPlus = [inputCO.replace("remove localstorage ", ``)];
+    if (cmdW19 == "remove localstorage") {var rlsPlus = inputCO1.substr(20, inputCO1.length);
     localStorage.removeItem(rlsPlus);
     textlog = 'The local storage '+rlsPlus+' has been deleted' + '</br>';}
     if (inputCO == "remove font") {localStorage.removeItem('co-dev-font');
@@ -380,11 +380,6 @@ const localstorage = function() {
     var value = longone.substr(ls_v+6, longone.length);
     var ls_l = longone.indexOf(" ");
     var key = longone.substr(0, ls_l);
-    console.log(ls_k);
-    console.log(ls_v);
-    console.log(value);
-    console.log(key);
-    console.log(longone);
     if (ls_k == -1 || ls_v == -1) {
     return error;
     } else {
