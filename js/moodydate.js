@@ -19,7 +19,7 @@ var moodydate;
 var moodyfulldate;
 
 // Time and Date
-window.setInterval('TimeDate()', 200);
+window.setInterval('i_TimeDate()', 200);
 
 // Month as text
 switch(new Date().getMonth()) {
@@ -126,7 +126,7 @@ switch(new Date().getDay()) {
        break;
 }
 
-function TimeDate() {
+function i_TimeDate() {
     
     // Extract the data from get
     today = new Date();

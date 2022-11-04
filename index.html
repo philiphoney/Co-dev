@@ -16,9 +16,12 @@
     <!-- font-family: 'Mukta', sans-serif; -->
     <link href="https://fonts.googleapis.com/css2?family=Inconsolata&display=swap" rel="stylesheet">
     <!-- font-family: 'Inconsolata', monospace; -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- CSS -->
     <link rel="stylesheet" href="./css/style.css">
     <!-- JS -->
+    <script src="https://cdn.jsdelivr.net/gh/philiphoney/Moody-Date/version/v1.0/moodydate.js"></script>
+    <script src="./js/settings.js"></script>
     <script src="./js/moodydate.js"></script>
     <script src="./js/moodypw.js"></script>
     <script src="./js/shap.js"></script>
@@ -26,7 +29,9 @@
     <script src="./js/index.js"></script>
 </head>
 <body id="body">
+<div id="viewbar-top"><div id="vb-os"><span id="icon" class="empty"></span></div><b><div id="vb-title">app</div></b><div style="padding-right: 10px;" id="vb-time"></div></div>
 <div id="content-log"></div>
-<div id="input-content"><div id="view"></div><input id="input" type="text" placeholder="help"></div>
+<div id="input-content"><input id="input" type="text" placeholder="help"><div id="viewbar-bottom"><div id="b_vb-os"><span id="b_icon" class="empty"></span></div><b><div id="b_vb-title"></div></b><div style="padding-right: 10px;" id="b_vb-time"></div></div></div>
+<script src="./js/startsettings.js"></script><script src="./js/viewbar.js"></script>
 </body>
 </html>

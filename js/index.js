@@ -28,15 +28,17 @@ var co_active = false
 var inputCO1 = "";
 var f4; var t4; var f6; var t6; var f8; var t8; var f12; var t12; var f16; var t16; var f18; var t18; var f24; var t24;
 
-setTimeout (time_evend, 0); function time_evend() {
-    if (localStorage["co-dev-theme"] != null) {
-        var theme = localStorage["co-dev-theme"]
-        document.getElementById("body").style = (theme + font);
+setTimeout (time_evend, 1); function time_evend() {
+    if (settings("theme")[0] == "") {
+    } else {
+    var theme = settings("theme")[0];
+    document.getElementById("body").style = (theme + font);
     }
-    if (localStorage["co-dev-font"] != null) {
-        var font0 = localStorage["co-dev-font"]
-        var font = "--font: "+font0;
-        document.getElementById("body").style = (font + theme);
+
+    if (settings("font") == "") {} else {
+    var font0 = settings("font");
+    var font = "--font: "+font0;
+    document.getElementById("body").style = (font + theme);
     }
 }
 
@@ -73,7 +75,7 @@ function logPost() {
 
     // Commands
     if (inputCO == "info") {
-    textlog = '✨ Co dev Web Version [v11.3] </br>';}
+    textlog = '✨ Co dev Web Version [v12.0]'+'</br>';}
     if (inputCO == "cls" || inputCO == "clear") {
     document.getElementById("content-log").innerHTML = ""; textlog = ""; cmd_counter = 1}
     if (inputCO == "exit") { window.close(); textlog = '<span id="error">exit could not be executed</span>'+ '</br>';}
@@ -85,6 +87,7 @@ function logPost() {
     • exit                = Close the Co Dev </br>
     • restart             = Restart the Window </br>
     • system              = Infos about my OS </br>
+    • settings            = List the settings </br>
     • history             = Recall your previous commands </br>
     • hosthref            = Website href </br>
     • hostname            = Website Host Name </br>
@@ -183,9 +186,9 @@ function logPost() {
     if (inputCO == "font") {
     textlog = `<span style="font-family: 'Roboto Mono', monospace;">• Roboto Mono</span>`+`</br>`+`<span style="font-family: 'Mukta', sans-serif;">• Mukta</span>`+`</br>`+`<span style="font-family: 'Inconsolata', monospace;">• Inconsolata</span>` + `</br>`;}
     if (cmdW5 == "font ") {let fontPlus = [inputCO.replace("font ", ``)];
-    if (fontPlus == "roboto mono") {localStorage.setItem('co-dev-font', "'Roboto Mono', monospace;");}
-    if (fontPlus == "mukta") {localStorage.setItem('co-dev-font', "'Mukta', sans-serif;");}
-    if (fontPlus == "inconsolata") {localStorage.setItem('co-dev-font', "'Inconsolata', monospace;");}
+    if (fontPlus == "roboto mono") {editsettings("font", "'Roboto Mono', monospace;")}
+    if (fontPlus == "mukta") {editsettings("font", "'Mukta', sans-serif;")}
+    if (fontPlus == "inconsolata") {editsettings("font", "'Inconsolata', monospace;");}
     textlog = 'To see the writing you have to restart once' + '</br>';}
     if (inputCO == "history") {
     textlog = 'history:'+'</br>' + '--------' + '</br>';}
@@ -201,8 +204,11 @@ function logPost() {
     if (cmdW16 == "localstorage add") {localstorage();
     if (localstorage() == error) {} else {
     textlog = 'The local storage '+localstorage()+' was created' + '</br>';}}
-    if (cmdW13 == "install theme") {let themePlus = [inputCO.replace("install theme ", ``)]; localStorage.setItem('co-dev-theme', themePlus);
+    if (cmdW13 == "install theme") {var themePlus = [inputCO.replace("install theme ", ``)]; editsettings("theme", themePlus);
     textlog = 'Theme has been installed. To load the theme you have to restart it' + '</br>';}
+    // Settings 
+    if (inputCO == "settings") {
+    textlog = 'SETTINGS'+'</br>'+'<input type="eset" id="e-settings">' + '</br>' + '<a id="button" href="##" onclick="es_save()">[save]</a>'+'<a id="button" style="color: var(--color-error);" href="##" onclick="es_reset()">[reset]</a>'+'</br>'+'</br>';}
     // JSD / CDN
     if (cmdW3 == "cdn") {
     var jsdPlus = inputCO1.substr(4, inputCO1.length);jsd(jsdPlus);
@@ -225,12 +231,12 @@ function logPost() {
     d_server = d_http[0].substr(0, dhttp);
     folders = [d_http[0].replace(d_server, ``)];
     }
-    if (dlink0 == "https" || dlink0 == "http:" || d_server == "gh") {textlog = '<span id="d"><span style="background-color: var(--d-color-server-github);">'+d_server+'</span>'+'<span style="background-color: var(--d-color-folder);">'+folders+'</span></span>' + '</br>'+'Jsdelivr link:' + '</br>'+jsd_output()+'</br>'; navigator.clipboard.writeText(jsd_output());+ '</br>';}
-    if (d_server == "npm") {textlog = '<span id="d"><span style="background-color: var(--d-color-server-npm);">'+d_server+'</span>'+'<span style="background-color: var(--d-color-folder);">'+folders+'</span></span>' + '</br>'+'Jsdelivr link:' + '</br>'+jsd_output()+'</br>'; navigator.clipboard.writeText(jsd_output());+ '</br>';}
-    if (d_server == "wp") {textlog = '<span id="d"><span style="background-color: var(--d-color-server-wp);">'+d_server+'</span>'+'<span style="background-color: var(--d-color-folder);">'+folders+'</span></span>' + '</br>'+'Jsdelivr link:' + '</br>'+jsd_output()+'</br>'; navigator.clipboard.writeText(jsd_output());+ '</br>';}}
+    if (dlink0 == "https" || dlink0 == "http:" || d_server == "gh") {textlog = '<span id="d"><span style="background-color: var(--d-color-server-github);">'+d_server+'</span>'+'<span style="background-color: var(--d-color-folder);">'+folders+'</span></span>' + '</br>'+'Jsdelivr link:' + '</br>'+'<a href="'+jsd_output()+'" target="_blank">'+jsd_output()+'</a>'+'</br>'; navigator.clipboard.writeText(jsd_output());+ '</br>';}
+    if (d_server == "npm") {textlog = '<span id="d"><span style="background-color: var(--d-color-server-npm);">'+d_server+'</span>'+'<span style="background-color: var(--d-color-folder);">'+folders+'</span></span>' + '</br>'+'Jsdelivr link:' + '</br>'+'<a href="'+jsd_output()+'" target="_blank">'+jsd_output()+'</a>'+'</br>'; navigator.clipboard.writeText(jsd_output());+ '</br>';}
+    if (d_server == "wp") {textlog = '<span id="d"><span style="background-color: var(--d-color-server-wp);">'+d_server+'</span>'+'<span style="background-color: var(--d-color-folder);">'+folders+'</span></span>' + '</br>'+'Jsdelivr link:' + '</br>'+'<a href="'+jsd_output()+'" target="_blank">'+jsd_output()+'</a>'+'</br>'; navigator.clipboard.writeText(jsd_output());+ '</br>';}}
     if (jsdPlus == "cdn" || jsdPlus == "") {textlog = error}}
     // Remove
-    if (inputCO == "remove theme") {localStorage.removeItem('co-dev-theme');
+    if (inputCO == "remove theme") {editsettings("theme", "");
     textlog = 'The theme has been deleted to complete the change restart it' + '</br>';}
     if (cmdW9 == "remove ls") {var rlsPlus = inputCO1.substr(10, inputCO1.length);
     localStorage.removeItem(rlsPlus);
@@ -238,7 +244,7 @@ function logPost() {
     if (cmdW19 == "remove localstorage") {var rlsPlus = inputCO1.substr(20, inputCO1.length);
     localStorage.removeItem(rlsPlus);
     textlog = 'The local storage '+rlsPlus+' has been deleted' + '</br>';}
-    if (inputCO == "remove font") {localStorage.removeItem('co-dev-font');
+    if (inputCO == "remove font") {editsettings("font", "");
     textlog = 'The font has been deleted, please restart again' + '</br>';}
     // Search
     if (cmdW6 == "google") {let sePlus = [inputCO.replace("google ", ``)]; window.open("https://www.google.com/search?q="+ search(sePlus[0]));
@@ -313,16 +319,26 @@ function logPost() {
     co_active = true;
     }}
 
+    if (inputCO == "settings") {
+        let a_ls_settings = (localStorage["settings"]);
+    document.getElementById("e-settings").value = a_ls_settings;
+    co_active = true;
+    }
+
     // The End of Command
     if (cmd_counter == 1) {} else {
     var cmd_befor = cmd_counter-1
     document.getElementById("co"+cmd_befor).style = ("padding: 0px;");
     }
     if(co_active == true) {
-    document.getElementById("co"+cmd_counter).style = ("padding: 0px 0px 40px;");
+    if (viewbar == true) {
+    document.getElementById("co"+cmd_counter).style = ("padding: 0px 0px 60px;");
+    } else {document.getElementById("co"+cmd_counter).style = ("padding: 0px 0px 40px;")}
     co_active = false
     } else {
-    document.getElementById("co"+cmd_counter).style = ("padding: 20px;");}
+    if (viewbar == true) {
+    document.getElementById("co"+cmd_counter).style = ("padding: 40px;");
+    } else {document.getElementById("co"+cmd_counter).style = ("padding: 20px;");}}
     window.scrollTo(0,document.body.scrollHeight);
 }
 
@@ -372,6 +388,11 @@ var outputrh = sha1(outputpw1);
 return outputrh;
 }
 
+function es_save() {
+  var settingsvalue =  document.getElementById("e-settings").value
+  localStorage.setItem('settings', settingsvalue);
+  window.location.href = "/";
+}
 
 const localstorage = function() {
     var ls_k = inputCO.indexOf("key=");
@@ -386,4 +407,9 @@ const localstorage = function() {
     localStorage.setItem(key, value);
     return key;
     }
+}
+
+function es_reset() {
+    localStorage.removeItem("settings");
+    window.location.href = "/";
 }

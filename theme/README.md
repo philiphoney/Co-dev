@@ -15,7 +15,7 @@ install theme --color-background: #ffffff; --color-input: #a9a9a9c7; --color-inp
 <img src="https://cdn.discordapp.com/attachments/698641984499220531/1023323444600909845/Bildschirmfoto_2022-09-24_um_21.23.49.png" width="55%"/>
 
 ```
-install theme --color-background: #251c14; --color-input: #372f22c7; --color-input-font: #c3b389; --color-line: #fee41b; --color-log-i: #9e781a; --color-log-input: #bcbc97; --color-text: #c3b389; --color-error: #d46c6c; --color-selection: #43301d; --color-evend: #5d4321; --color-scrollbar: #2c2c2c80; --color-scrollbar-1: #7e612336;
+install theme --color-background: #251c14; --color-input: #372f22c7; --color-input-font: #c3b389; --color-line: #fee41b; --color-log-i: #9e781a; --color-log-input: #bcbc97; --color-text: #c3b389; --color-error: #d46c6c; --color-selection: #43301d; --color-evend: #5d4321; --color-scrollbar: #2c2c2c80; --color-scrollbar-1: #7e612336; --color-viewbar: #f0b400;
 ````
 
 ## Custom theme
@@ -23,16 +23,24 @@ install theme --color-background: #251c14; --color-input: #372f22c7; --color-inp
 <img src="https://cdn.discordapp.com/attachments/698641984499220531/1023323445703999719/Bildschirmfoto_2022-09-24_um_21.35.57.png" width="100%"/>
 
 ```css
---color-background: #12141c;
+--color-background:#12141c;
 --color-input: #1a1c26c7;
 --color-input-font: #c9c9c9;
 --color-line: #02ff85;
 --color-log-i: #36bbf4;
 --color-log-input: #a9e5d8;
 --color-text: #c9c9c9;
---color-error: #ff5c5c;
+--color-error:#ff5c5c;
 --color-selection: #2e2e34;
 --color-evend: #ff57b9;
+--color-warning: #ffdd57;
 --color-scrollbar: #2c2c2c80;
---color-scrollbar-1: #61616136;
+--color-scrollbar-1: #4d494936;
+--color-viewbar: #02ff85;
+--color-viewbar-text: #6d6d6d;
+--d-color-server-github: #0caade;
+--d-color-server-npm: #de0f0c;
+--d-color-server-wp: #ffffff;
+--d-color-folder: #1cc17d;
+--d-color-text: #000000;
 ```
