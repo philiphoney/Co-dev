@@ -75,7 +75,7 @@ function logPost() {
 
     // Commands
     if (inputCO == "info") {
-    textlog = '✨ Co dev Web Version [v12.0]'+'</br>';}
+    textlog = '✨ Co dev Web Version [v12.1]'+'</br>';}
     if (inputCO == "cls" || inputCO == "clear") {
     document.getElementById("content-log").innerHTML = ""; textlog = ""; cmd_counter = 1}
     if (inputCO == "exit") { window.close(); textlog = '<span id="error">exit could not be executed</span>'+ '</br>';}
@@ -399,7 +399,7 @@ const localstorage = function() {
     var longone = inputCO1.substr(ls_k + 4, inputCO1.length);
     var ls_v = longone.indexOf("value=");
     var value = longone.substr(ls_v+6, longone.length);
-    var ls_l = longone.indexOf(" ");
+    var ls_l = longone.indexOf(" value=");
     var key = longone.substr(0, ls_l);
     if (ls_k == -1 || ls_v == -1) {
     return error;
