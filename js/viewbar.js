@@ -1,5 +1,6 @@
 startSettings();
 viewTimeDate();
+
 function viewTimeDate() {
         // Extract the data from get
         v_today = new Date();
@@ -20,8 +21,8 @@ function viewTimeDate() {
 }
 
 function startSettings() {
-   document.getElementById("vb-title").innerHTML = app;
-   document.getElementById("b_vb-title").innerHTML = app;
+   document.getElementById("vb-title").innerHTML = settings("title");
+   document.getElementById("b_vb-title").innerHTML = settings("title");
 
    var os = navigator.platform;
    var ossplit = os.split("");

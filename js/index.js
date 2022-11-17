@@ -26,6 +26,7 @@ let history = [];
 var c_his = -1;
 var co_active = false
 var inputCO1 = "";
+var settings_c = false;
 var f4; var t4; var f6; var t6; var f8; var t8; var f12; var t12; var f16; var t16; var f18; var t18; var f24; var t24;
 
 setTimeout (time_evend, 1); function time_evend() {
@@ -73,9 +74,14 @@ function logPost() {
     var cmdW18 = inputCO.substr(0,18);
     var cmdW19 = inputCO.substr(0,19);
 
+    // Settings test
+    if (settings_c == true) {
+        document.getElementById("settings-content"+--cmd_counter).innerHTML = '<span>#Closed</span>'; settings_c = false;
+    }
+
     // Commands
     if (inputCO == "info") {
-    textlog = '✨ Co dev Web Version [v12.1]'+'</br>';}
+    textlog = '✨ Co dev Web Version [v13.0]'+'</br>';}
     if (inputCO == "cls" || inputCO == "clear") {
     document.getElementById("content-log").innerHTML = ""; textlog = ""; cmd_counter = 1}
     if (inputCO == "exit") { window.close(); textlog = '<span id="error">exit could not be executed</span>'+ '</br>';}
@@ -109,7 +115,7 @@ function logPost() {
     • dnt / donottrack = Do not track </br>
     • gh / github  = Co Dev on GitHub </br>
     • open [file name]    = Open files or links </br>
-    • rpw [true(with special characters) or false(without special character)] = Create random password </br>
+    • rpw (special characters [true]) or (without special character [false]) = Create random password </br>
     • rhash = Create random hash </br>
     • sha(1, 224, 256, 384, 512) [text] = Convert text to a hash </br>
     • ls / localstorage   = List the Local Storage </br>
@@ -127,7 +133,7 @@ function logPost() {
     `;}
     if (inputCO == "system") {
     if (window.matchMedia('(prefers-color-scheme: dark)').matches) { style = "dark"; } else { style = "light"; }
-    textlog = `[⨀] style: `+ style + `</br>`}
+    textlog = `• Style: `+ style + `</br>`+`• OS: `+ system_info("ua") + `</br>`}
     if (inputCO == "hosthref") {
     textlog = 'Host name: ' +  window.location.href + '</br>';}
     if (inputCO == "hostname") {
@@ -176,12 +182,12 @@ function logPost() {
     if (inputCO == "gh" || inputCO == "github") { window.open('https://github.com/philiphoney/Co-dev');
     textlog = ''+ '</br>';}
     if (cmdW3 == "rpw") {let pwPlus = [inputCO.replace("rpw ", ``)];
-    f4 = pwPlus[0].search ("4 false"); t4 = pwPlus[0].search ("4 true"); f6 = pwPlus[0].search ("6 false"); t6 = pwPlus[0].search ("6 true"); f8 = pwPlus[0].search ("8 false"); t8 = pwPlus[0].search ("8 true"); f12 = pwPlus[0].search ("12 false"); t12 = pwPlus[0].search ("12 true"); f16 = pwPlus[0].search ("16 false"); t16 = pwPlus[0].search ("16 true"); f18 = pwPlus[0].search ("18 false"); t18 = pwPlus[0].search ("18 true"); f24 = pwPlus[0].search ("24 false"); t24 = pwPlus[0].search ("24 true");     t28 = pwPlus[0].search ("28 true"); f28 = pwPlus[0].search ("28 false"); t32 = pwPlus[0].search ("32 true"); f32 = pwPlus[0].search ("32 false"); fpw2(); ;
+    f4 = pwPlus[0].search("false 4"); t4 = pwPlus[0].search("true 4"); f6 = pwPlus[0].search("false 6"); t6 = pwPlus[0].search("true 6"); f8 = pwPlus[0].search("false 8"); t8 = pwPlus[0].search("true 8"); f12 = pwPlus[0].search("false 12"); t12 = pwPlus[0].search("true 12"); f16 = pwPlus[0].search("false 16"); t16 = pwPlus[0].search("true 16"); f18 = pwPlus[0].search("false 18"); t18 = pwPlus[0].search("true 18"); f24 = pwPlus[0].search("false 24"); t24 = pwPlus[0].search("true 24"); t28 = pwPlus[0].search("true 28"); f28 = pwPlus[0].search("false 28"); t32 = pwPlus[0].search("true 32"); f32 = pwPlus[0].search("false 32"); fpw2();
     if (pwPlus == "false") {var rpwPlus = outputpw0} if (pwPlus == "true") {var rpwPlus = outputpw1} if (rpwPlus2 == true) {var rpwPlus = outputpw2}
     navigator.clipboard.writeText(rpwPlus); textlog = "Random password:"+ '</br>' + rpwPlus + '</br>';
     if (pwPlus == "true" || pwPlus == "false" || rpwPlus2 == true){}else {textlog = error;}}
     if (inputCO == "date") {textlog = ''}
-    if (inputCO == "rhash") {
+    if (inputCO == "rhash") {navigator.clipboard.writeText(rhash());
     textlog = 'Random hash: ' + '</br>' + rhash() + '</br>'}
     if (inputCO == "font") {
     textlog = `<span style="font-family: 'Roboto Mono', monospace;">• Roboto Mono</span>`+`</br>`+`<span style="font-family: 'Mukta', sans-serif;">• Mukta</span>`+`</br>`+`<span style="font-family: 'Inconsolata', monospace;">• Inconsolata</span>` + `</br>`;}
@@ -207,8 +213,8 @@ function logPost() {
     if (cmdW13 == "install theme") {var themePlus = [inputCO.replace("install theme ", ``)]; editsettings("theme", themePlus);
     textlog = 'Theme has been installed. To load the theme you have to restart it' + '</br>';}
     // Settings 
-    if (inputCO == "settings") {
-    textlog = 'SETTINGS'+'</br>'+'<input type="eset" id="e-settings">' + '</br>' + '<a id="button" href="##" onclick="es_save()">[save]</a>'+'<a id="button" style="color: var(--color-error);" href="##" onclick="es_reset()">[reset]</a>'+'</br>'+'</br>';}
+    if (inputCO == "settings") { settings_c = true;
+    textlog = 'SETTINGS'+'</br>'+'<div id="settings-content'+cmd_counter+'">'+'<input type="eset" id="e-settings">'+'</br>'+'<a id="button" href="##" onclick="es_save()">[save]</a>'+'<a id="button" style="color: var(--color-error);" href="##" onclick="es_reset()">[reset]</a>'+'<div id="settings-loader"></div>'+'</br>'+'</div>'+'</br>';}
     // JSD / CDN
     if (cmdW3 == "cdn") {
     var jsdPlus = inputCO1.substr(4, inputCO1.length);jsd(jsdPlus);
@@ -258,7 +264,7 @@ function logPost() {
     if (cmdW6 == "amazon") {let sePlus = [inputCO.replace("amazon ", ``)]; window.open("https://www.amazon.com/s?k="+ search(sePlus[0]));
     textlog = 'Amazon searched for the following results: '+ sePlus + '</br>';}
     if (inputCO == "browser") {
-    textlog = 'Search with these browsers:' + '</br>'+'---------------------------'+'</br>'+'• Google'+'</br>'+'• Bing'+'</br>'+'• Ecosia&#127795;'+'</br>'+'• DuckDuckGo🦆'+'</br>'+'• Amazon'+'</br>';}
+    textlog = 'Searchwith these browsers:' + '</br>'+'---------------------------'+'</br>'+'• Google'+'</br>'+'• Bing'+'</br>'+'• Ecosia&#127795;'+'</br>'+'• DuckDuckGo🦆'+'</br>'+'• Amazon'+'</br>';}
     // SHA
     if (cmdW4 == "sha1") {
     var sha1Plus = inputCO1.substr(5, inputCO1.length); let outsha1 = sha1(sha1Plus); textlog = 'SHA1 Hash: '+'</br>' + outsha1 + '</br>'; navigator.clipboard.writeText(outsha1);
@@ -320,7 +326,7 @@ function logPost() {
     }}
 
     if (inputCO == "settings") {
-        let a_ls_settings = (localStorage["settings"]);
+     let a_ls_settings = (localStorage["settings"]);
     document.getElementById("e-settings").value = a_ls_settings;
     co_active = true;
     }
@@ -378,22 +384,25 @@ document.addEventListener('keydown', (event) => {
     }
 });
 
-const search = function (sinput) {
+// searchspace => +
+const search= function (sinput) {
     let sempty = [sinput.replace(/ /g, "+")];
   return sempty;
 }
 
+// random hash
 function rhash() {
 var outputrh = sha1(outputpw1);
 return outputrh;
 }
 
 function es_save() {
-  var settingsvalue =  document.getElementById("e-settings").value
+document.getElementById("settings-loader").innerHTML = "<div class='loader'>☕️</div>"
+  var settingsvalue = document.getElementById("e-settings").value
   localStorage.setItem('settings', settingsvalue);
   window.location.href = "/";
 }
-
+// add Local Storage
 const localstorage = function() {
     var ls_k = inputCO.indexOf("key=");
     var longone = inputCO1.substr(ls_k + 4, inputCO1.length);
@@ -409,7 +418,20 @@ const localstorage = function() {
     }
 }
 
+// after the settings confirmation
 function es_reset() {
     localStorage.removeItem("settings");
     window.location.href = "/";
+}
+
+function system_info(infovalue) {
+
+    if (infovalue == "ua") {
+        var ua = navigator.userAgent
+        var osinfo_s = ua.indexOf("(");
+        var osinfo_start = ua.substr(osinfo_s, ua.length);
+        var osinfo_end = osinfo_start.indexOf(")");
+        var osinfo = ua.substr(osinfo_s+1, osinfo_end-1);
+       return osinfo;
+    }
 }

@@ -144,6 +144,10 @@ color: var(--color-error);
 
 /* icon */
 
+#icon,#b_icon {
+    margin-top: 4px;
+}
+
 .icons8-mac-os { 
     display: inline-block;
     width: 16px;
@@ -184,4 +188,8 @@ input {
 
 input[type=eset]:focus {
     border: 1px solid #00000000;
+}
+
+#vb-time, b_vb-title {
+    padding-top: 3px;
 }
