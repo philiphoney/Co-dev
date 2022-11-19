@@ -20,6 +20,7 @@ function start() {
     else {localStorage.setItem('settings', JSON.stringify(json_settings))}
 }
 
+// what is this Setting
 const settings = function(s_value)  {
     let a_ls_settings = (localStorage["settings"]);
     let ls_settings = JSON.parse(a_ls_settings);
@@ -42,6 +43,7 @@ const settings = function(s_value)  {
 
 }
 
+// Edit Settings
 const editsettings = function(es_value, value) {
     let a_ls_settings = (localStorage["settings"]);
     let ls_settings = JSON.parse(a_ls_settings);
