@@ -115,7 +115,7 @@ function logPost() {
 
     // Commands
     if (inputCO == "info") {
-    textlog = '✨ Co dev Web Version [v14.0]'+'</br>';}
+    textlog = '✨ Co dev Web Version [v14.1]'+'</br>';}
     if (inputCO == "cls" || inputCO == "clear") {
     document.getElementById("content-log").innerHTML = ""; textlog = ""; cmd_counter = 1}
     if (inputCO == "exit") { window.close(); textlog = '<span id="error">exit could not be executed</span>'+ '</br>';}
@@ -166,6 +166,9 @@ function logPost() {
     • cdn [your link] = Create a CDN for your script with <a target="_blank" href="https://www.jsdelivr.com/">jsDeliv</a> </br>
     • echo = Spend something</br>
     • speedtest = Test the internet </br>
+    • ! = Run exclamation mark </br>
+    • ! ls = list exclamation mark </br>
+    • ! add ["[name the command]",] = Add commands </br>
     `;}
     if (inputCO == "system") {
     if (window.matchMedia('(prefers-color-scheme: dark)').matches) { style = "dark"; } else { style = "light"; }
@@ -258,14 +261,15 @@ function logPost() {
     counterspeed = 0; speedtestStop = false; counterspeed += 5; speedtest(); commandSpeedtest(); speedtestisrun = true
     textlog = '<span id="speedtest'+cmd_counter+'"'+'></span>'+'</br>';}}
     if (cmdW1 == "!") {
+    if (localStorage["auto-command"] != null) {}
+    else {localStorage.setItem('auto-command', []);} 
     var thelogis = error
     if (inputCO == "!") {
-    exclamationmark(); thelogis = "The exclamation mark is executed"+'</br>'
+    if (localStorage["auto-command"] == '') { thelogis = '<span id="warning">⚠️ The exclamation mark is empty</span>'+'</br>';}
+    else {exclamationmark(); thelogis = "The exclamation mark is executed"+'</br>'} 
     input.value = "!"}
     if (cmdW5 == "! add")  {
     let cmd_ac = JSON.parse(inputCO.replace("! add ", ""));
-    if (localStorage["auto-command"] != null) {}
-    else {localStorage.setItem('auto-command', []);} 
     localStorage.setItem('auto-command', JSON.stringify(cmd_ac));
     thelogis = "The ! command have been changed to "+ cmd_ac +'</br>'
     }
@@ -404,17 +408,18 @@ function logPost() {
     }}
 
     if (inputCO == "settings") {
-     let a_ls_settings = (localStorage["settings"]);
+    let a_ls_settings = (localStorage["settings"]);
     document.getElementById("e-settings").value = a_ls_settings;
     co_active = true;
     }
 
     if (cmdW4 == "! ls") {
-    var emc = JSON.parse(localStorage["auto-command"])
+    if (localStorage["auto-command"] == '') {}else {
+    let emc = JSON.parse(localStorage["auto-command"])
     for (let i=0; i < emc.length; ++i) {
     document.getElementById("co"+cmd_counter).innerHTML += "• "+emc[i]+'</br>';
     co_active = true; 
-    }}
+    }}}
 
     // The End of Command
     if (cmd_counter == 1) {} else {
