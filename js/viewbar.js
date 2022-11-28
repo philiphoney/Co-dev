@@ -22,7 +22,6 @@ function viewTimeDate() {
 
 function startSettings() {
    document.getElementById("vb-title").innerHTML = settings("title");
-   document.getElementById("b_vb-title").innerHTML = settings("title");
 
    var os = navigator.platform;
    var ossplit = os.split("");
@@ -55,4 +54,25 @@ function startSettings() {
     document.getElementById("icon").innerHTML = " ";
     document.getElementById("b_icon").innerHTML = " ";
    }
+}
+
+let a_ls_settings = (localStorage["settings"]);
+let ls_settings = JSON.parse(a_ls_settings);
+if (ls_settings.viewBarSpeedTest == true) {
+    viewbBarSpeedTest();
+}
+
+
+function viewbBarSpeedTest() {
+    var vbt = document.getElementById("vb-st")
+    var vbb = document.getElementById("b-st");
+    var mbps = '<span style="font-size: 10px;">Mbps</span>'
+    speedtest();
+    loopstart(); function loopstart() {setTimeout (time_evend, 1000); function time_evend() {
+    speedtest();
+    vbt.innerHTML = outputSpeedTest1+mbps;
+    vbb.innerHTML = outputSpeedTest1+mbps;
+    loopstart();
+    }}
+        
 }

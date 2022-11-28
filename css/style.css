@@ -28,6 +28,8 @@ body {
     --d-color-folder: #1cc17d;
     --d-color-text: #000000;
 
+    --tx-color-background: ;
+
 
     font-family: var(--font);
     line-height: 20px;
@@ -190,6 +192,32 @@ input[type=eset]:focus {
     border: 1px solid #00000000;
 }
 
-#vb-time, b_vb-title {
+#vb-time, #b_vb-title {
     padding-top: 3px;
+}
+
+#title {
+    text-align: center;
+    position: fixed;
+    z-index: 3;
+    width: 100%;
+    padding-top: 2px;
+    color: var(--color-viewbar-text);
+}
+
+#vb-st, #b-st {
+    display: none;
+    padding-left: 200%;
+}
+
+#b_vb-time {
+    padding-top: 2px;
+    padding-right: 10px;
+}
+
+#iframe iframe {
+    position: fixed;
+    z-index: 1000;
+    width: 100%;
+    height: 100%;
 }

@@ -1,0 +1,17 @@
+#tx-line {
+    color: var(--tx-color-line);
+}
+
+#tx-log-i {
+    color: var(--tx-color-log-i);
+}
+
+#tx-log-input {
+    color: var(--tx-color-log-input);
+    }
+
+:root {
+    --tx-color-line: #02ccff;
+    --tx-color-log-i: #4381ff;
+    --tx-color-log-input: #b1c2ff;
+}

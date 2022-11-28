@@ -1,0 +1,63 @@
+body {
+    background-color: var(--color-background);
+    background-color: #12141c00;
+    margin: 0;
+    font-family: 'Roboto Mono', monospace;
+    width: 100%;
+    height: 100%;
+}
+
+#input-cmd {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+#input-cmd input {
+    width: 100%;
+    border: 0px solid rgba(0, 0, 0, 0);
+    font-size: 16px;
+    font-family: var(--font);
+    color: var(--color-input-font);
+    font-weight: bold;
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+    outline: none;
+    border-color: rgba(0, 0, 0, 0);
+    border-radius: 0px;
+    height: 20px;
+    background-color: var(--color-input);
+    -webkit-backdrop-filter: saturate(100%) blur(20px);
+    backdrop-filter: saturate(100%) blur(20px);
+}
+
+#input-cm input[type=text-i]:focus {
+    border: 0px solid #00000000;
+}
+
+::selection {
+    color: black;
+    background-color: white;
+}
+
+
+textarea {
+    position: absolute;
+    height: 99%;
+    overflow: auto;
+    outline: none;
+    resize: none;
+    width: 99.7%;
+    border: 0px solid #00000000;
+    margin: 0;
+    background-color: #12141c00;
+    -webkit-backdrop-filter: saturate(90%) blur(20px);
+    backdrop-filter: saturate(90%) blur(20px);
+    color: var(--color-input-font);
+    color: white;
+}
+
+@media screen and (max-width: 1000px) {textarea {width: 10%;}}
+@media screen and (max-width: 999px) {textarea {width: 99.6%;}}
+@media screen and (max-width: 751px) {textarea {width: 99.3%;}}
+@media screen and (max-width: 399px) {textarea {width: 99%;}}

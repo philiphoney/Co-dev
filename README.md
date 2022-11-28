@@ -21,3 +21,23 @@ Co dev is designed for web development. With many useful commands that improve y
 At the beginning we see an empty interface at the bottom you see an input bar where you enter all the commands and confirm with Enter. 
 
 The first command should be familiar to everyone. With the command `Help` you can list all commands. To do this write the word `Help` in the input and confirm with Enter.
+
+
+## Settings
+
+```JSON
+{
+"title":"co-dev",
+"description":"",
+
+"theme":"",
+"font":"",
+
+"viewBar":false,
+"viewBarPosition":"top",
+"viewBarSpeedTest":false,
+
+"AutoCmd":false,
+"AllList":false
+}
+```

@@ -7,6 +7,7 @@
 *
 */
 
+
 var tag = "";
 var app = "co-dev";
 let keyclipboard = [];
@@ -27,7 +28,30 @@ var c_his = -1;
 var co_active = false
 var inputCO1 = "";
 var settings_c = false;
+let outputSpeedTest0 = 0
+let outputSpeedTest1 = 0
+var SpeedtestOn = false;
+var counterspeed = 0
+var speedtestStop = false;
+var speedtestisrun = false;
+var speedtestStopTime = false
+var emcmd = false
+var cd_stop = false
 var f4; var t4; var f6; var t6; var f8; var t8; var f12; var t12; var f16; var t16; var f18; var t18; var f24; var t24;
+
+var textTXS = `  
+<span style="color: lightblue">
+'########:'##::::'##::'######::</br>
+... ##..::. ##::'##::'##... ##:</br>
+::: ##:::::. ##'##::: ##:::..::</br>
+::: ##::::::. ###::::. ######::</br>
+::: ##:::::: ## ##::::..... ##:</br>
+::: ##::::: ##:. ##::'##::: ##:</br>
+::: ##:::: ##:::. ##:. ######::</br>
+:::..:::::..:::::..:::......:::</br>
+</br> [v1.1.0] | command: tx or txs
+</span>
+`+'</br>' ;
 
 setTimeout (time_evend, 1); function time_evend() {
     if (settings("theme")[0] == "") {
@@ -44,8 +68,20 @@ setTimeout (time_evend, 1); function time_evend() {
 }
 
 function logPost() {
+    if (speedtestisrun == true) {
+        speedtestStop == null
+        document.getElementById("speedtest"+ cmd_counter).innerHTML = '<span id="error">The test was aborted</span>';
+        speedtestisrun = false
+    }
+
+    if (settings_c == true) {
+        var test =  "settings-content"+cmd_counter;
+        document.getElementById(test).innerHTML = '<span>#Closed</span>'; settings_c = false;
+    }
+
     document.getElementById("input").setAttribute("placeholder", "");
-    inputCO1 = document.getElementById("input").value;
+    if (emcmd == false) {inputCO1 = document.getElementById("input").value;}
+    emcmd = false;
     inputCO = inputCO1.toLowerCase();
     textlog = '<span id="error">The command "'+ inputCO1 +'" is either misspelled orcould not be found.</span></br>';
     error = '<span id="error">The command "'+ inputCO1 +'" is either misspelled orcould not be found.</span></br>';
@@ -59,6 +95,7 @@ function logPost() {
     history[c_his] = inputCO;
 
     // Commands+
+    var cmdW1 = inputCO.substr(0,1);
     var cmdW2 = inputCO.substr(0,2);
     var cmdW3 = inputCO.substr(0,3);
     var cmdW4 = inputCO.substr(0,4);
@@ -75,13 +112,10 @@ function logPost() {
     var cmdW19 = inputCO.substr(0,19);
 
     // Settings test
-    if (settings_c == true) {
-        document.getElementById("settings-content"+--cmd_counter).innerHTML = '<span>#Closed</span>'; settings_c = false;
-    }
 
     // Commands
     if (inputCO == "info") {
-    textlog = '✨ Co dev Web Version [v13.2]'+'</br>';}
+    textlog = '✨ Co dev Web Version [v14.0]'+'</br>';}
     if (inputCO == "cls" || inputCO == "clear") {
     document.getElementById("content-log").innerHTML = ""; textlog = ""; cmd_counter = 1}
     if (inputCO == "exit") { window.close(); textlog = '<span id="error">exit could not be executed</span>'+ '</br>';}
@@ -115,7 +149,7 @@ function logPost() {
     • dnt / donottrack = Do not track </br>
     • gh / github  = Co Dev on GitHub </br>
     • open [file name]    = Open files or links </br>
-    • rpw (special characters [true]) or (without special character [false]) = Create random password </br>
+    • rpw (special characters [true]) or (without special character [false] or ([true / false] 4, 6, 8, 12, 16, 18, 24, 28, 32) = Create random password </br>
     • rhash = Create random hash </br>
     • sha(1, 224, 256, 384, 512) [text] = Convert text to a hash </br>
     • ls / localstorage   = List the Local Storage </br>
@@ -124,12 +158,14 @@ function logPost() {
     • install theme [your theme code] = For more informations <a target="_blank" href="https://github.com/philiphoney/Co-dev/tree/main/theme">https://github.com/philiphoney/Co-dev/tree/main/theme</a> </br>
     • remove theme = Remove the theme </br>
     • remove ls / localstorage [key name] = The key and the value are deleted </br>
-    • google, bing etc. [your search term] = Search in the web </br>
+    • google, bing etc. [your searchterm] = Searchin the web </br>
     • browser = list all bowsers we provide </br>
     • date = Show for just all dates </br>
     • font = What font is supported </br>
     • font [your font] = Changes the font </br>
     • cdn [your link] = Create a CDN for your script with <a target="_blank" href="https://www.jsdelivr.com/">jsDeliv</a> </br>
+    • echo = Spend something</br>
+    • speedtest = Test the internet </br>
     `;}
     if (inputCO == "system") {
     if (window.matchMedia('(prefers-color-scheme: dark)').matches) { style = "dark"; } else { style = "light"; }
@@ -201,7 +237,7 @@ function logPost() {
     // Local Storage
     if (inputCO == "ls" || inputCO == "localstorage" ) {textlog = 'Local Storage list:' + '</br>' + '-------------------' + '</br>';}
     if (inputCO == "ls clear" || inputCO == "localstorage clear") {localStorage.clear();
-    textlog = 'All local storage has been deleted !' + '</br>';}
+    textlog = 'All local storage has been deleted!' + '</br>';}
     if (cmdW18 == "localstorage clear" ) {localStorage.clear();
     textlog = 'All local storage has been deleted !' + '</br>';}
     if (cmdW6 == "ls add") {localstorage();
@@ -212,9 +248,44 @@ function logPost() {
     textlog = 'The local storage '+localstorage()+' was created' + '</br>';}}
     if (cmdW13 == "install theme") {var themePlus = [inputCO.replace("install theme ", ``)]; editsettings("theme", themePlus);
     textlog = 'Theme has been installed. To load the theme you have to restart it' + '</br>';}
+    if (cmdW5 == "echo ") {textlog = inputCO1.substr(5, inputCO1.length)+'</br>';}
     // Settings 
     if (inputCO == "settings") { settings_c = true;
     textlog = 'SETTINGS'+'</br>'+'<div id="settings-content'+cmd_counter+'">'+'<input type="eset" id="e-settings">'+'</br>'+'<a id="button" href="##" onclick="es_save()">[save]</a>'+'<a id="button" style="color: var(--color-error);" href="##" onclick="es_reset()">[reset]</a>'+'<div id="settings-loader"></div>'+'</br>'+'</div>'+'</br>';}
+    if (inputCO == "speedtest") {
+    if (settings("speedtest") == true) {
+    textlog = '<span id="warning">⚠️ Speedtest is currently not possible</span>'+'</br>';} else {
+    counterspeed = 0; speedtestStop = false; counterspeed += 5; speedtest(); commandSpeedtest(); speedtestisrun = true
+    textlog = '<span id="speedtest'+cmd_counter+'"'+'></span>'+'</br>';}}
+    if (cmdW1 == "!") {
+    var thelogis = error
+    if (inputCO == "!") {
+    exclamationmark(); thelogis = "The exclamation mark is executed"+'</br>'
+    input.value = "!"}
+    if (cmdW5 == "! add")  {
+    let cmd_ac = JSON.parse(inputCO.replace("! add ", ""));
+    if (localStorage["auto-command"] != null) {}
+    else {localStorage.setItem('auto-command', []);} 
+    localStorage.setItem('auto-command', JSON.stringify(cmd_ac));
+    thelogis = "The ! command have been changed to "+ cmd_ac +'</br>'
+    }
+    if (cmdW4 == "! ls") {thelogis = "List the ! commands:"+'</br>'+"--------------------"+'</br>'}
+    textlog = thelogis}
+    // txs app
+    if (cmdW2 == "tx" || cmdW3 == "txs") {
+    if (cmdW3 == "tx ") {var tx_cmd = inputCO.replace("tx ", "")}
+    if (cmdW4 == "txs ") {var tx_cmd = inputCO.replace("txs ", "")}
+    app = "txs"
+    textlog = "Open the text file "+tx_cmd+" in txs"+'</br>'
+    if (tx_cmd == undefined || tx_cmd == undefined || inputCO == "txs -v") {
+    textlog = '<span id="warning">⚠️ Pease enter a file name</span>' +'</br>'
+    } else {
+    localStorage.setItem('txs', tx_cmd);
+    txsIF();
+    }}
+    if (inputCO == "txs -v") {
+    app = "txs"
+    textlog = textTXS}
     // JSD / CDN
     if (cmdW3 == "cdn") {
     var jsdPlus = inputCO1.substr(4, inputCO1.length);jsd(jsdPlus);
@@ -235,8 +306,7 @@ function logPost() {
     } else {
     var dhttp = d_http[0].indexOf("/");
     d_server = d_http[0].substr(0, dhttp);
-    folders = [d_http[0].replace(d_server, ``)];
-    }
+    folders = [d_http[0].replace(d_server, ``)];}
     if (dlink0 == "https" || dlink0 == "http:" || d_server == "gh") {textlog = '<span id="d"><span style="background-color: var(--d-color-server-github);">'+d_server+'</span>'+'<span style="background-color: var(--d-color-folder);">'+folders+'</span></span>' + '</br>'+'Jsdelivr link:' + '</br>'+'<a href="'+jsd_output()+'" target="_blank">'+jsd_output()+'</a>'+'</br>'; navigator.clipboard.writeText(jsd_output());+ '</br>';}
     if (d_server == "npm") {textlog = '<span id="d"><span style="background-color: var(--d-color-server-npm);">'+d_server+'</span>'+'<span style="background-color: var(--d-color-folder);">'+folders+'</span></span>' + '</br>'+'Jsdelivr link:' + '</br>'+'<a href="'+jsd_output()+'" target="_blank">'+jsd_output()+'</a>'+'</br>'; navigator.clipboard.writeText(jsd_output());+ '</br>';}
     if (d_server == "wp") {textlog = '<span id="d"><span style="background-color: var(--d-color-server-wp);">'+d_server+'</span>'+'<span style="background-color: var(--d-color-folder);">'+folders+'</span></span>' + '</br>'+'Jsdelivr link:' + '</br>'+'<a href="'+jsd_output()+'" target="_blank">'+jsd_output()+'</a>'+'</br>'; navigator.clipboard.writeText(jsd_output());+ '</br>';}}
@@ -308,9 +378,15 @@ function logPost() {
     s = checkTime(s);
 
     var time = (h + ":" + m + ":" + s);
-    document.getElementById("content-log").innerHTML += `<log><span id="line">◜</span><span id="log-i"><span id="line">[</span>` + app + `<span id="line">] </span>`+ time +`</span><br><span id="line">◟</span><span id="log-input">`+ tag +`</span><span id="log-input">${input.value}</span><br><span id="text">`+ textlog +`<span id="co`+ cmd_counter +`"></span></span></log></br>`;
+    if (app == "co-dev") {document.getElementById("content-log").innerHTML += `<log><span id="line">◜</span><span id="log-i"><span id="line">[</span>` + app + `<span id="line">] </span>`+ time +`</span><br><span id="line">◟</span><span id="log-input">`+ tag +`</span><span id="log-input">${input.value}</span><br><span id="text">`+ textlog +`<span id="co`+ cmd_counter +`"></span></span></log></br>`;}
+    if (app == "txs") {document.getElementById("content-log").innerHTML += `<log><span id="tx-line">◜</span><span id="tx-log-i"><span id="tx-line">[</span>` + app + `<span id="tx-line">] </span>`+ time +`</span><br><span id="tx-line">◟</span><span id="tx-log-input">`+ tag +`</span><span id="tx-log-input">${input.value}</span><br><span id="text">`+ textlog +`<span id="co`+ cmd_counter +`"></span></span></log></br>`;}
+    document.getElementById("input").value = "";
 
     if (inputCO == "date") {document.getElementById("co"+cmd_counter).innerHTML += moodyfulldate+'</br>'; window.scrollTo(0,document.body.scrollHeight);co_active = true;;}
+
+    if (app == "txs") {
+    app = "co-dev"
+    }
 
     if (inputCO == "history") {
     for (let i=0; i < history.length; ++i) {
@@ -320,8 +396,10 @@ function logPost() {
 
     if (inputCO == "localstorage" || inputCO == "ls") {
     for (let i=0; i < localStorage.length; i++) {
-    let storageKey = localStorage.key(i);
-    document.getElementById("co"+cmd_counter).innerHTML += "• "+storageKey +' : '+ localStorage.getItem(storageKey) +'</br>';
+    var storageKey = localStorage.key(i);
+    if (settings("alllist") == true) {
+    document.getElementById("co"+cmd_counter).innerHTML += "• "+storageKey +' : '+'<xmp>'+ localStorage.getItem(storageKey) +'</xmp>'; 
+    } else {document.getElementById("co"+cmd_counter).innerHTML += "• "+storageKey+'</br>';}
     co_active = true;
     }}
 
@@ -330,6 +408,13 @@ function logPost() {
     document.getElementById("e-settings").value = a_ls_settings;
     co_active = true;
     }
+
+    if (cmdW4 == "! ls") {
+    var emc = JSON.parse(localStorage["auto-command"])
+    for (let i=0; i < emc.length; ++i) {
+    document.getElementById("co"+cmd_counter).innerHTML += "• "+emc[i]+'</br>';
+    co_active = true; 
+    }}
 
     // The End of Command
     if (cmd_counter == 1) {} else {
@@ -385,8 +470,8 @@ document.addEventListener('keydown', (event) => {
 });
 
 // searchspace => +
-const search= function (sinput) {
-    let sempty = [sinput.replace(/ /g, "+")];
+const search = function (sinput) {
+  let sempty = [sinput.replace(/ /g, "+")];
   return sempty;
 }
 
@@ -401,6 +486,7 @@ function es_save() {
   localStorage.setItem('settings', settingsvalue);
   window.location.href = "/";
 }
+
 // add Local Storage
 const localstorage = function() {
     var ls_k = inputCO.indexOf("key=");
@@ -423,6 +509,17 @@ function es_reset() {
     window.location.href = "/";
 }
 
+
+function exclamationmark() {
+    var emc = JSON.parse(localStorage["auto-command"])
+    for (let i=0; i < emc.length; ++i) {
+    setTimeout (time_evend, 100); function time_evend() {
+    emcmd = true
+    inputCO1 = emc[i];
+    input.value = emc[i]
+    logPost();
+}}}
+
 function system_info(infovalue) {
 
     if (infovalue == "ua") {
@@ -433,4 +530,86 @@ function system_info(infovalue) {
         var osinfo = ua.substr(osinfo_s+1, osinfo_end-1);
        return osinfo;
     }
+}
+
+if (SpeedtestOn == true) {
+speedtest();
+window.setInterval('loop()', 1000); function loop() {speedtest();} 
+}
+
+function speedtest() {
+    counterspeed += 25
+    const imageAddr = 'https://upload.wikimedia.org/wikipedia/commons/a/a6/Brandenburger_Tor_abends.jpg';
+    const downloadSize = 2707459; // this must match with the image above
+    counterspeed += 10
+    let startTime, endTime;
+    measureConnectionSpeed();
+    async function measureConnectionSpeed() {
+      startTime = (new Date()).getTime();
+      const cacheBuster = '?nnn=' + startTime;
+      counterspeed += 10
+     
+      const download = new Image();
+      download.src = imageAddr + cacheBuster;
+      // this returns when the image is finished downloading
+      counterspeed += 40
+      await download.decode();
+      endTime = (new Date()).getTime();
+      const duration = (endTime - startTime) / 1000;
+      const bitsLoaded = downloadSize * 8;
+      const speedBps = (bitsLoaded / duration).toFixed(2);
+      const speedKbps = (speedBps / 1024).toFixed(2);
+      const speedMbps = (speedKbps / 1024).toFixed(2);
+      const speedMbps1 = (speedKbps / 1024);
+      outputSpeedTest1 = speedMbps
+      outputSpeedTest0 = speedMbps1
+
+      counterspeed += 10
+      speedtestStop = true
+
+      return outputSpeedTest1;
+    }
+
+}
+
+function commandSpeedtest() {
+    loopstart(); function loopstart() {setTimeout (time_evend, 100); function time_evend() {
+        if (speedtestStop == false) {
+        document.getElementById("speedtest"+cmd_counter).innerHTML = counterspeed+"%";
+        loopstart();
+    } else {
+        if (speedtestStopTime == true) {
+            outputSpeedTest1 = '<span id="warning">⚠️ The time is up</span>'
+            document.getElementById("speedtest"+cmd_counter).innerHTML = outputSpeedTest1;
+            speedtestStopTime = false
+            speedtestisrun = false
+        } else {
+            outputSpeedTest1 = "Download: "+outputSpeedTest1+'<span style="font-size: 10px;">Mbps</span>'
+            document.getElementById("speedtest"+cmd_counter).innerHTML = outputSpeedTest1;
+            speedtestisrun = false
+            outputSpeedTest1 = "error"
+        }}}}
+        setTimeout (time_evend, 95700); function time_evend() {
+           if (speedtestStop == false) {
+               speedtestStopTime = true
+               speedtestisrun = false
+}}}
+
+function txsIF() {
+    window.onscroll = function () {window.scrollTo(0, document.body.scrollHeight);}
+    document.getElementById("iframe").innerHTML += ('<iframe src="./txs/index.html" frameborder="0"></iframe>')
+}
+
+window.setInterval('loop()', 0); function loop() {
+    if (localStorage["txs"] == 'close') {
+    localStorage.removeItem('txs'); 
+    quittxs();
+}
+else {} 
+} 
+
+function quittxs() {
+    window.onscroll = function () {}
+    window.scrollTo(0,document.body.scrollHeight);
+    document.getElementById("iframe").innerHTML = '';
 }

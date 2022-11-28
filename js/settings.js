@@ -11,7 +11,11 @@ function Settings() {
         font: "",
 
         viewBar: false,
-        viewBarPosition: "top"
+        viewBarPosition: "top",
+        viewBarSpeedTest: false,
+
+        AutoCmd: false,
+        AllList: false
     }
 }
 
@@ -20,7 +24,6 @@ function start() {
     else {localStorage.setItem('settings', JSON.stringify(json_settings))}
 }
 
-// what is this Setting
 const settings = function(s_value)  {
     let a_ls_settings = (localStorage["settings"]);
     let ls_settings = JSON.parse(a_ls_settings);
@@ -41,9 +44,20 @@ const settings = function(s_value)  {
     return ls_settings.font;
     }
 
+    if (s_value == "speedtest") {
+    return ls_settings.viewBarSpeedTest;
+    }
+
+    if (s_value == "autocmd") {
+    return ls_settings.AutoCmd;
+    }
+
+    if (s_value == "alllist") {
+    return ls_settings.AllList;
+    }
+
 }
 
-// Edit Settings
 const editsettings = function(es_value, value) {
     let a_ls_settings = (localStorage["settings"]);
     let ls_settings = JSON.parse(a_ls_settings);

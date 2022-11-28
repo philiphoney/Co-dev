@@ -4,8 +4,8 @@
     "display": "fullscreen",
     "scope": "/",
     "start_url": "../index.html",
-    "name": "Co Dev",
-    "short_name": "Co Dev",
+    "name": "Co dev",
+    "short_name": "Co dev",
     "description": "Web cmd",
     "icons": [
         {
