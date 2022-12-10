@@ -14,8 +14,9 @@ function Settings() {
         viewBarPosition: "top",
         viewBarSpeedTest: false,
 
-        AutoCmd: false,
-        AllList: false
+        autoCmd: false,
+        allList: false,
+        userInfo: false
     }
 }
 
@@ -49,11 +50,15 @@ const settings = function(s_value)  {
     }
 
     if (s_value == "autocmd") {
-    return ls_settings.AutoCmd;
+    return ls_settings.autoCmd;
     }
 
     if (s_value == "alllist") {
-    return ls_settings.AllList;
+    return ls_settings.allList;
+    }
+
+    if (s_value == "userinfo") {
+    return ls_settings.userInfo;
     }
 
 }

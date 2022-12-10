@@ -37,7 +37,7 @@ The first command should be familiar to everyone. With the command `Help` you ca
 "viewBarPosition":"top",
 "viewBarSpeedTest":false,
 
-"AutoCmd":false,
-"AllList":false
+"autoCmd":false,
+"allList":false
 }
 ```
