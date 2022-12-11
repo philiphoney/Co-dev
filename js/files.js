@@ -15,16 +15,16 @@ var filetype;
 function start() {
   var port = location.href;
   var fromstart = port.indexOf("files");
-  var herf = port.substr(fromstart + 7, port.length);
-  var herf = herf.replaceAll("%20", " ");
-  if (herf == "") {
+  var href = port.substr(fromstart + 7, port.length);
+  var href = href.replaceAll("%20", " ");
+  if (href == "") {
     error();
   } else {
-    var folderN = herf.indexOf("/");
-    var filetypeN = herf.indexOf(".");
-    var folder = herf.substr(0, folderN);
-    var file = herf.substr(folderN + 1, filetypeN - folderN - 1);
-    filetype = herf.substr(filetypeN + 1, herf.length);
+    var folderN = href.indexOf("/");
+    var filetypeN = href.indexOf(".");
+    var folder = href.substr(0, folderN);
+    var file = href.substr(folderN + 1, filetypeN - folderN - 1);
+    filetype = href.substr(filetypeN + 1, href.length);
     if (localStorage["$" + folder] != null && filetype == "txt") {
       var folderJFS = JSON.parse(localStorage["$" + folder]);
       fileNumber(folderJFS, file);

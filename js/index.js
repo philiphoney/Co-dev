@@ -115,7 +115,7 @@ function logPost() {
   }
   xcon = true;
   con0 += 1;
-  con1 += 1;
+  con1 = keyclipboard.length +1;
   c_his += 1;
   cmd_counter += 1;
   keyclipboard[con0] = inputCO1;
@@ -142,7 +142,7 @@ function logPost() {
 
   // Commands
   if (inputCO == "info") {
-    textlog = "✨ Co dev Web Version [v15.0]" + "</br>";
+    textlog = "✨ Co dev Web Version [v15.1]" + "</br>";
   }
   if (inputCO == "cls" || inputCO == "clear") {
     document.getElementById("content-log").innerHTML = "";
@@ -534,7 +534,6 @@ function logPost() {
         txsInfolder(tx_cmd);
       }
     }
-    console.log(jfsError);
     if (jfsError == true) {
       jfsError = false;
       textlog =
@@ -1006,13 +1005,17 @@ function checkTime(i) {
   return i;
 }
 
+// Keydown Event
 document.addEventListener("keydown", (event) => {
+
+  // Enter
   const keyCode = event.key;
   if (event.keyCode == 13) {
     logPost();
     document.getElementById("input").value = "";
   }
 
+  // ↑
   if (event.keyCode == 38) {
     con1 -= 1;
     var keyoutput = keyclipboard[con1];
@@ -1026,6 +1029,7 @@ document.addEventListener("keydown", (event) => {
     }
   }
 
+ // ↓
   if (event.keyCode == 40) {
     con1 += 1;
     var keyoutput = keyclipboard[con1];
