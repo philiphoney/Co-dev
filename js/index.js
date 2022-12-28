@@ -69,6 +69,10 @@ function time_evend() {
     var font = "--font: " + font0;
     document.getElementById("body").style = font + theme;
   }
+
+  if (settings("autocmd")) {
+    exclamationmark();
+  }
 }
 
 function logPost() {
@@ -115,7 +119,7 @@ function logPost() {
   }
   xcon = true;
   con0 += 1;
-  con1 = keyclipboard.length +1;
+  con1 = keyclipboard.length + 1;
   c_his += 1;
   cmd_counter += 1;
   keyclipboard[con0] = inputCO1;
@@ -142,7 +146,7 @@ function logPost() {
 
   // Commands
   if (inputCO == "info") {
-    textlog = "✨ Co dev Web Version [v15.1]" + "</br>";
+    textlog = "✨ Co dev Web Version [v16.0]" + "</br>";
   }
   if (inputCO == "cls" || inputCO == "clear") {
     document.getElementById("content-log").innerHTML = "";
@@ -204,6 +208,7 @@ function logPost() {
     • echo = Spend something</br>
     • speedtest = Test the internet </br>
     • ! = Run exclamation mark </br>
+    • ! add ["command"] = Create ! command </br>
     • ! ls = list exclamation mark </br>
     • nf [name the folder] = Create a folder </br>
     • cd [folder name] = Go to the folder ("../" so you close the folder)</br>
@@ -437,6 +442,10 @@ function logPost() {
       textlog =
         "The local storage " + localstorage() + " was created" + "</br>";
     }
+  }
+  // ls storage
+  if (inputCO == "ls -s") {
+    textlog = storage();
   }
   if (cmdW13 == "install theme") {
     var themePlus = [inputCO.replace("install theme ", ``)];
@@ -1007,7 +1016,6 @@ function checkTime(i) {
 
 // Keydown Event
 document.addEventListener("keydown", (event) => {
-
   // Enter
   const keyCode = event.key;
   if (event.keyCode == 13) {
@@ -1029,7 +1037,7 @@ document.addEventListener("keydown", (event) => {
     }
   }
 
- // ↓
+  // ↓
   if (event.keyCode == 40) {
     con1 += 1;
     var keyoutput = keyclipboard[con1];
@@ -1242,7 +1250,80 @@ function txsInfolder(file) {
       txsIF();
     }
   }
-  if (passed == false) {
+  if (!passed) {
     jfsError = true;
   }
+}
+
+function storage() {
+  var tr = `<table><tr><th id="th-1">Name</th><th>Storage</th><th> %Used</th></tr>`;
+  let table = "";
+  var used = 0;
+  var usedPercent = 0;
+  var fullPercent = 0;
+  for (let i = 0; i < localStorage.length; i++) {
+    var storageKey = localStorage.key(i);
+    var storageValue = localStorage[storageKey];
+    used += storageValue.length;
+  }
+  usedPercent = used / 100;
+  for (let i = 0; i < localStorage.length; i++) {
+    var storageKey = localStorage.key(i);
+    var storageValue = localStorage[storageKey];
+
+    table +=
+      `<tr>
+    <td id="td-1">` +
+      storageKey +
+      `</td>
+    <td>` +
+      storaglist(storageValue.length) +
+      `</td>
+    <td>` +
+      (storageValue.length / usedPercent).toFixed(2) +
+      `%</td>
+    </tr>`;
+    fullPercent += storageValue.length / usedPercent;
+  }
+
+  var tableEnd =
+    `<tr id="tr-end">
+    <td></td>
+    <td>` +
+    storaglist(used) +
+    `</td>
+    <td>` +
+    fullPercent.toFixed(0) +
+    `%</td>
+    </tr>
+    </span>`;
+  co_active = true;
+
+  return tr + table + tableEnd + "</table>";
+}
+
+function storaglist(v) {
+  var kb = (v / 1024).toFixed(2) * 1;
+  var mb = (v / 1048576).toFixed(2) * 1;
+  var gb = (v / 1073741824).toFixed(2) * 1;
+  var tb = (v / 1099511627776).toFixed(0) * 1;
+  var output = v + " Byte";
+
+  if (v >= 1024) {
+    output = kb + " KB";
+  }
+
+  if (v >= 1048576) {
+    output = mb + " MB";
+  }
+
+  if (v >= 1073741824) {
+    output = gb + " GB";
+  }
+
+  if (v >= 1099511627776) {
+    output = tb + " TB";
+  }
+
+  return output;
 }

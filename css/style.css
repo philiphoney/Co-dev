@@ -235,3 +235,23 @@ input[type=eset]:focus {
 .ls {
     display: flex;
 }
+
+/* table */
+
+#td-1, #th-1 {
+    text-align: left;
+}
+
+th {
+    font-weight: 100;
+}
+
+td {
+    text-align: right;
+    border-right: 10px solid #00000000;
+}
+
+#tr-end {
+    text-align: left;
+    color: var(--color-evend);
+}
