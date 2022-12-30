@@ -146,7 +146,7 @@ function logPost() {
 
   // Commands
   if (inputCO == "info") {
-    textlog = "✨ Co dev Web Version [v16.0]" + "</br>";
+    textlog = "✨ Co dev Web Version [v16.1]" + "</br>";
   }
   if (inputCO == "cls" || inputCO == "clear") {
     document.getElementById("content-log").innerHTML = "";
@@ -195,6 +195,7 @@ function logPost() {
     • sha(1, 224, 256, 384, 512) [text] = Convert text to a hash </br>
     • ls / localstorage   = List the Local Storage </br>
     • ls / localstorage add key=[key name] value=[value name] = Create a local storage </br>
+    • ls -s = Memory from local Storage</br>
     • ls / localstorage clear = All local storage has been deleted </br>
     • install theme [your theme code] = For more informations <a target="_blank" href="https://github.com/philiphoney/Co-dev/tree/main/theme">https://github.com/philiphoney/Co-dev/tree/main/theme</a> </br>
     • remove theme = Remove the theme </br>
